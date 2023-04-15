@@ -93,11 +93,11 @@ analytics:
 
 # Site Author
 author:
-  name             : "Your Name"
+  name             : "Haesong Choi"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "I am an **amazing** person."
-  location         : "Somewhere"
-  email            :
+  bio              : "Ph.D. candidate in Statistics at FSU"
+  location         : "U.S.A."
+  email            : "haesong.choi@fsu.edu"
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
