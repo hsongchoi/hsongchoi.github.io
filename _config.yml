@@ -16,11 +16,11 @@ minimal_mistakes_skin    : "contrast" #  default"air", "aqua", "contrast", "dark
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Site Title"
-title_separator          : "-"
-subtitle                 : # site tagline that appears below site title in masthead
-name                     : "Your Name"
-description              : "An amazing website."
+title                    : "Haesong Choi"
+title_separator          : "|"
+subtitle                 : "FSU Ph.D. Candidate in Statistics" # site tagline that appears below site title in masthead
+name                     : "Haesong Choi"
+description              : "Atomic habits"
 url                      : "https://hsongchoi.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
