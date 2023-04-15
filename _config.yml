@@ -101,26 +101,26 @@ author:
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
-      url: "mailto:haesong.choi@fsu.com"
+      #url: "mailto:haesong.choi@fsu.com"
     - label: "Website"
       icon: "fas fa-fw fa-link"
-      url: "https://hsongchoi.github.io/"
+      #url: "https://hsongchoi.github.io/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/hsongchoi/"
+      #url: "https://github.com/hsongchoi/"
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
-      url: "https://www.instagram.com/h_ssong0/"
+      #url: "https://www.instagram.com/h_ssong0/"
 
 # Site Footer
 footer:
   links:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/hsongchoi/"
+      #url: "https://github.com/hsongchoi/"
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
-      url: "https://www.instagram.com/h_ssong0/"
+      #url: "https://www.instagram.com/h_ssong0/"
 
 
 # Reading Files
