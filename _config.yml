@@ -106,7 +106,7 @@ analytics:
 # Site Author
 author:
   name             : "Haesong Choi"
-  avatar           : #"assets/img/wooil.png" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  avatar           : "/assets/images/09E3C403-0874-4F0E-9506-8D8DD75A2342_1_105_c.jpeg" #"assets/img/wooil.png" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "Ph.D. candidate in Statistics at FSU"
   location         : "U.S.A."
   email            : 
