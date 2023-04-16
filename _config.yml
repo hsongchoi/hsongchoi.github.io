@@ -18,8 +18,9 @@ minimal_mistakes_skin    : "default" # "default", "air", "aqua", "contrast", "da
 locale                   : "en-US"
 title                    : "Haesong Choi"
 title_separator          : "|"
+subtitle                 : "Haesong's Notes"
 name                     : "Haesong Choi"
-description              : ""
+description              : "Atomic habits"
 url                      : https://hsongchoi.github.io
 baseurl                  : ""
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
@@ -112,10 +113,10 @@ author:
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
-      # url: mailto:mcwooil2@gmail.com
+      url: mailto:haesong.choi@fsu.com
     - label: "Website"
       icon: "fas fa-fw fa-link"
-      # url: "https://your-website.com"
+      url: "https://hsongchoi.github.io/"
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
       url: 
@@ -130,7 +131,7 @@ author:
       # url: "https://instagram.com/"
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
-      url: 
+      url: "https://www.instagram.com/h_ssong0/"
 
 # Site Footer
 footer:
@@ -152,7 +153,7 @@ footer:
       # url:
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
-      # url:
+      url: "https://www.instagram.com/h_ssong0/"
 
 
 # Reading Files
