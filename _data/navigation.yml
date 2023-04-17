@@ -5,13 +5,32 @@ main:
   - title: "Tag"
     url: /tags/
 
+
 side:
-  - title: ""
+
+  - title: "Data Science"
     children:
-      - title: "Category"
-        url: /categories/
-      - title: "Tag"
-        url: /tags/
+    - title: "Machine Learning"
+      url: "/MachineLearning/"
+      category: Machine Learning
+    - title: "Tensorflow"
+
+  - title: "Programming"
+    children:
+    - title: "Python"
+      url: /python/
+      category: python
+    - title: "R"
+      url: /R/
+      category: R
+
+  - title: "Back-end"
+    children:
+    - title: "SQL"
+      url: /sql/
+      category: sql
+
+  
   # - title: "Sample Collections"
   #   url: /collection-archive/
   # - title: "Sitemap"
