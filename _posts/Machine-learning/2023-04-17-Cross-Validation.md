@@ -34,6 +34,7 @@ print("Target:\n{}".format(iris_dataset['target']))
 X_train, X_test, y_train, y_test = train_test_split(iris_dataset['data'], iris_dataset['target'], test_size = 0.2, random_state=12) #A fixed seed
 ```
 
+
 - Before splitting, the train_test_split function shuffles the dataset using a pseudorandom number generator.
 - It extracts 75% of the rows in the data as the training set and the remaining 25% of the data as the test set.
 
