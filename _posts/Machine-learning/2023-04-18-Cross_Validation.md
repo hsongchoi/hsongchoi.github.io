@@ -2,7 +2,7 @@
 title:  "Cross-Validation (CV)"
 categories: ML
 tag: [Scikit-learn, Python, Machine-Learning]
-author_profile: false
+author_profile: true
 typora-root-url: ../
 search: true
 published: true
