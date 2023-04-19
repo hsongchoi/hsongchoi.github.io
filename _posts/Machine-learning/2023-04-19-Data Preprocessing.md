@@ -409,6 +409,7 @@ between 0 and 1.
 $$
 X_{std} = \frac{X - X_{min}}{X_{max} - X_{min}},
 $$
+and
 $$
 X_{scaled} = X_{std} * (max - min) + min.
 $$
