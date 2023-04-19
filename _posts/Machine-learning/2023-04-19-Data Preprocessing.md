@@ -406,14 +406,12 @@ values for the features.
 
 between 0 and 1.
 
-
-
 $$
-
-X_{std} = \frac{X - X_{min}}{X_{max} - X_{min}} \\
-
-X_{scaled} = X_{std} * (max - min) + min
-
+X_{std} = \frac{X - X_{min}}{X_{max} - X_{min}},
+$$
+and
+$$
+X_{scaled} = X_{std} * (max - min) + min.
 $$
 
 where max, min represent feature ranges.
