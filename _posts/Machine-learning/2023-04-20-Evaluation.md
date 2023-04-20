@@ -337,9 +337,7 @@ Similar to the precision-recall curve, the ROC curve considers all possible thre
 
 
 $$
-
 TPR = recall = \frac{TP}{TP + FN}.
-
 $$
 
 
@@ -348,9 +346,7 @@ The false positive rate is the fraction of false positives out of all negative s
 
 
 $$
-
 FPR = \frac{FP}{FP + TN}.
-
 $$
 
 
