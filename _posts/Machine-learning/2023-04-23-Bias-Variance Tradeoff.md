@@ -238,3 +238,4 @@ To build a good model, we need to find a good balance between bias and variance 
 
 <img src = "https://miro.medium.com/v2/resize:fit:1124/format:webp/1*RQ6ICt_FBSx6mkAsGVwx8g.png">
 
+[Reference1](https://towardsdatascience.com/understanding-the-bias-variance-tradeoff-165e6942b229)
