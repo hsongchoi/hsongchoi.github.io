@@ -1,7 +1,7 @@
 ---
 title:  "Kaggle: Santander Customer Satisfaction"
-categories: ML
-tag: [Kaggle, Python, Machine-Learning, Classification, XGBoost, LightGBM, Scikit-learn, Pandas, Matplotlib, Seaborn, Numpy, Project]
+categories: Kaggle
+tag: [Python, Machine-Learning, Classification, XGBoost, LightGBM, Scikit-learn, Pandas, Matplotlib, Seaborn, Numpy, Project]
 author_profile: false
 typora-root-url: ../
 search: true
