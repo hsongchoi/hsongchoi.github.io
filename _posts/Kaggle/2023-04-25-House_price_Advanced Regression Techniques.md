@@ -1,7 +1,7 @@
 ---
 layout: single
 title:  "Kaggle: House Prices - Advanced Regression Techniques"
-categories: ML
+categories: Kaggle
 tag: [Scikit-learn, Python, Machine-Learning, Lasso, Ridge, Stacking, XGBoost, LightGBM, Regression]
 author_profile: true
 typora-root-url: ../
