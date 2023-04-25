@@ -1,5 +1,5 @@
 ---
-title:  "Kaggle: Santander Customer Satisfaction"
+title:  "Kaggle- Santander Customer Satisfaction"
 categories: Kaggle
 tag: [Python, Machine-Learning, Classification, XGBoost, LightGBM, Scikit-learn, Pandas, Matplotlib, Seaborn, Numpy, Project]
 author_profile: false

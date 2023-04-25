@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  "Kaggle: House Prices - Advanced Regression Techniques"
+title:  "Kaggle-House Prices - Advanced Regression Techniques"
 categories: Kaggle
 tag: [Scikit-learn, Python, Machine-Learning, Lasso, Ridge, Stacking, XGBoost, LightGBM, Regression]
 author_profile: true

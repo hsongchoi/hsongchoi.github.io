@@ -1,5 +1,5 @@
 ---
-title:  "Kaggle: Creditcard_Fraud_Detection"
+title:  "Kaggle- Creditcard_Fraud_Detection"
 categories: Kaggle
 tag: [Python, Machine-Learning, Classification, Imbalanced_data, Undersampling, SMOTE, Scikit-learn, Pandas, Matplotlib, Seaborn, Numpy, Project]
 author_profile: false
