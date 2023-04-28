@@ -18,11 +18,11 @@ Time complexity is defined in terms of `how many times it takes to run a given a
 
 For any monotonic functions $f(n)$ and $g(n)$ from the positive integers to the positive integers, we say that $f(n) = O(g(n))$ when there exist constants $c > 0$ and $n_0 > 0$ such that $f(n) \leq c \cdot g(n)$ for all $n \geq n_0$.
 
-> The function f(n) **does not grow faster than g(n)**, or that function g(n) is an **upper bound** for f(n) for all sufficiently large $n→\infty$.
+> The function f(n) **does not grow faster than g(n)**, or that function g(n) is an **upper bound** for f(n) for all sufficiently large $n\rightarrow \infty$.
 
 Here is a graphic representation of $f(n) = O(g(n))$ relation:
 
-<img src="../images/2023-04-28-Algorithm/image-20230428104612112.png" alt="image-20230428104612112"  />
+<img src="../images/2023-04-28-Complexity/image-20230428104612112.png" alt="image-20230428104612112"  />
 
 Examples: 
 
@@ -66,7 +66,7 @@ The input size has a strong relationship with time complexity. As the size of th
 
 Assume you have a set of numbers S= (10, 50, 20, 15, 30). There are `numerous algorithms` for sorting the given numbers. However, not all of them are effective. You must perform computational analysis on each algorithm to determine the most effective one.
 
-![image-20230428112008723](../images/2023-04-28-Algorithm/image-20230428112008723.png)
+![image-20230428112008723](../images/2023-04-28-Complexity/image-20230428112008723.png)
 
 The results were as follows: "[Heap Sort algorithms](https://www.simplilearn.com/tutorials/c-tutorial/heap-sort-in-c-program) performed well despite the length of the lists; on the other hand, you discovered that Insertion sort and Bubble sort algorithms performed far worse, significantly increasing computing time."
 
@@ -82,7 +82,7 @@ However, people frequently confuse Space-complexity with auxiliary space. Auxili
 
 We calculate the `time complexity` of the multiply function:
 
-![image-20230428113704700](../images/2023-04-28-Algorithm/image-20230428113704700.png)
+![image-20230428113704700](../images/2023-04-28-Complexity/image-20230428113704700.png)
 
 Let T(n) be a function of the algorithm's time complexity. 
 
@@ -103,7 +103,7 @@ Time limitation of Coding test
 
 We calculate the `space complexity` of the multiply function:
 
-![image-20230428113944517](../images/2023-04-28-Algorithm/image-20230428113944517.png)
+![image-20230428113944517](../images/2023-04-28-Complexity/image-20230428113944517.png)
 
 Let S(n) denote the algorithm's space complexity. 
 
