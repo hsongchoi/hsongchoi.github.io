@@ -1,7 +1,7 @@
 ---
 title:  "Complexity"
 categories: algorithm
-tag: [Complexity, Big-O]
+tag: [Time_Complexity, Space_Complexity, Big-O]
 author_profile: false
 typora-root-url: ../
 search: true
