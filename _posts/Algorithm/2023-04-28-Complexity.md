@@ -22,7 +22,9 @@ For any monotonic functions $f(n)$ and $g(n)$ from the positive integers to the 
 
 Here is a graphic representation of $f(n) = O(g(n))$ relation:
 
-![image-20230428124548302](/../images/2023-04-28-Complexity/image-20230428124548302.png)
+![image-20230428124548302](../images/2023-04-28-Complexity/image-20230428124548302.png)
+
+
 
 Examples: 
 
