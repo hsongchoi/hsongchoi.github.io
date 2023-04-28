@@ -1,5 +1,8 @@
 ---
+<<<<<<< HEAD:_posts/Algorithm/2023-04-28-Complexity.md
 
+=======
+>>>>>>> 9aa367bfd46a5c8270067dc1bcf4074a1c61cafc:_posts/2023-04-28-Complexity.md
 title:  "Complexity"
 categories: algorithm
 tag: [Complexity, Big-O]
@@ -7,6 +10,7 @@ author_profile: false
 typora-root-url: ../
 search: true
 use_math: true
+---
 
 ---
 
@@ -18,10 +22,7 @@ Time complexity is defined in terms of `how many times it takes to run a given a
 
 ### Definition of Big-O
 
-For any monotonic functions $f(n)$ and $g(n)$ from the positive integers to the positive integers, we say that $f(n) = O(g(n))$ when there exist constants $c > 0$ and $n_0 > 0$ such that
-$$
-f(n) \leq c * g(n)~for~all~n \geq n_0
-$$
+For any monotonic functions $f(n)$ and $g(n)$ from the positive integers to the positive integers, we say that $f(n) = O(g(n))$ when there exist constants $c > 0$ and $n_0 > 0$ such that $f(n) \leq c * g(n)$ for all $n \geq n_0$.
 
 > The function f(n) **does not grow faster than g(n)**, or that function g(n) is an **upper bound** for f(n) for all sufficiently large $n→\infty$.
 
