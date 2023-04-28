@@ -76,7 +76,7 @@ The results were as follows: "[Heap Sort algorithms](https://www.simplilearn.com
 
 Space complexity refers to **the total amount of memory space an algorithm/program uses, including the space of input values for execution**.
 
-However, people frequently confuse Space-complexity with auxiliary space. Auxiliary space is simply extra or temporary space, and it is not the same as space complexity. To put it another way, ` Auxiliary space + space used by input values = Space Complexity`. 
+However, people frequently confuse Space-complexity with auxiliary space. Auxiliary space is simply extra or temporary space, and it is not the same as space complexity. To put it another way,  **Auxiliary space + space used by input values = Space Complexity**. 
 
 >  The best algorithm/program should have a low level of space complexity. The less space required, the faster it executes.
 
