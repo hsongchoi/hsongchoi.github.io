@@ -1,3 +1,4 @@
+---
 title:  "Complexity"
 categories: algorithm
 tag: [Complexity, Big-O]
@@ -5,6 +6,7 @@ author_profile: false
 typora-root-url: ../
 search: true
 use_math: true
+---
 
 ## Time complexity
 
