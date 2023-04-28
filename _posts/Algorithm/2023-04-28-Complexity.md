@@ -22,7 +22,7 @@ For any monotonic functions $f(n)$ and $g(n)$ from the positive integers to the 
 
 Here is a graphic representation of $f(n) = O(g(n))$ relation:
 
-![image-20230428124548302](../images/2023-04-28-Complexity/image-20230428124548302.png)
+<img src = "https://viterbi-web.usc.edu/~adamchik/15-121/lectures/Algorithmic%20Complexity/pix/bigO.bmp">
 
 
 
@@ -68,7 +68,7 @@ The input size has a strong relationship with time complexity. As the size of th
 
 Assume you have a set of numbers S= (10, 50, 20, 15, 30). There are `numerous algorithms` for sorting the given numbers. However, not all of them are effective. You must perform computational analysis on each algorithm to determine the most effective one.
 
-<img src="../images/2023-04-28-Complexity/image-20230428124758293.png" alt="image-20230428124758293" style="zoom:50%;" />
+<img src = "https://www.simplilearn.com/ice9/free_resources_article_thumb/Time-Complexity-Article-Soni/Significannt-of-time-and-space-complexity.png">
 
 The results were as follows: "[Heap Sort algorithms](https://www.simplilearn.com/tutorials/c-tutorial/heap-sort-in-c-program) performed well despite the length of the lists; on the other hand, you discovered that Insertion sort and Bubble sort algorithms performed far worse, significantly increasing computing time."
 
@@ -84,7 +84,12 @@ However, people frequently confuse Space-complexity with auxiliary space. Auxili
 
 We calculate the `time complexity` of the multiply function:
 
-<img src="../images/2023-04-28-Complexity/image-20230428124830026.png" alt="image-20230428124830026" style="zoom:50%;" />
+1. mul <- 1
+2. i <- 1
+3. While i <= n do
+4.    mul = mul * 1
+5.    i = i + 1
+6. End while
 
 Let T(n) be a function of the algorithm's time complexity. 
 
@@ -105,7 +110,12 @@ Time limitation of Coding test
 
 We calculate the `space complexity` of the multiply function:
 
-<img src="../images/2023-04-28-Complexity/image-20230428124855530.png" alt="image-20230428124855530" style="zoom:50%;" />
+1. int mul, i
+2. While i < = n do
+3. mul <- mul * array[i]
+4. i <- i + 1
+5. end while
+6. return mul
 
 Let S(n) denote the algorithm's space complexity. 
 
