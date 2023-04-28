@@ -22,9 +22,7 @@ For any monotonic functions $f(n)$ and $g(n)$ from the positive integers to the 
 
 Here is a graphic representation of $f(n) = O(g(n))$ relation:
 
-![image-20230428124548302](/images/2023-04-28-Complexity/image-20230428124548302.png)
-
-
+![image-20230428124548302](/../images/2023-04-28-Complexity/image-20230428124548302.png)
 
 Examples: 
 
@@ -68,7 +66,7 @@ The input size has a strong relationship with time complexity. As the size of th
 
 Assume you have a set of numbers S= (10, 50, 20, 15, 30). There are `numerous algorithms` for sorting the given numbers. However, not all of them are effective. You must perform computational analysis on each algorithm to determine the most effective one.
 
-<img src="/images/2023-04-28-Complexity/image-20230428124758293.png" alt="image-20230428124758293" style="zoom:50%;" />
+<img src="../images/2023-04-28-Complexity/image-20230428124758293.png" alt="image-20230428124758293" style="zoom:50%;" />
 
 The results were as follows: "[Heap Sort algorithms](https://www.simplilearn.com/tutorials/c-tutorial/heap-sort-in-c-program) performed well despite the length of the lists; on the other hand, you discovered that Insertion sort and Bubble sort algorithms performed far worse, significantly increasing computing time."
 
@@ -84,7 +82,7 @@ However, people frequently confuse Space-complexity with auxiliary space. Auxili
 
 We calculate the `time complexity` of the multiply function:
 
-<img src="/images/2023-04-28-Complexity/image-20230428124830026.png" alt="image-20230428124830026" style="zoom:50%;" />
+<img src="../images/2023-04-28-Complexity/image-20230428124830026.png" alt="image-20230428124830026" style="zoom:50%;" />
 
 Let T(n) be a function of the algorithm's time complexity. 
 
@@ -105,13 +103,13 @@ Time limitation of Coding test
 
 We calculate the `space complexity` of the multiply function:
 
-<img src="/images/2023-04-28-Complexity/image-20230428124855530.png" alt="image-20230428124855530" style="zoom:50%;" />
+<img src="../images/2023-04-28-Complexity/image-20230428124855530.png" alt="image-20230428124855530" style="zoom:50%;" />
 
 Let S(n) denote the algorithm's space complexity. 
 
 In most systems, an integer occupies `4 bytes of memory`. As a result, the number of allocated bytes would be the space complexity.
 
-- Line 1 allocates memory space for `two integers`, resulting in S(n) = 4 bytes$\cdot 2$ = 8 bytes.
+- Line 1 allocates memory space for `two integers`, resulting in S(n) = 4 bytes $\cdot 2 =$  8 bytes.
 - Line 2 represents a loop. Lines 3 and 4 assign a value to an already existing variable. As a result, there is no need to set aside any space. The `return` statement in line 6 will allocate one more memory case. 
 - As a result, $S(n)= 4 \cdot 2 + 4 = 12$ bytes.
 - Because the array is used in the algorithm to allocate n cases of integers, the final space complexity will be $S(n) = n + 12 = O (n)$.
