@@ -121,30 +121,30 @@ message = f"Hi {name}. " \
 
 #### Remove items
 
-| Methods    | Description                                                  |
-| :--------- | :----------------------------------------------------------- |
-| del a[0]   | **Remove items by index or slice**<br />l = [0, 10, 20, 30, 40, 50]  del l[0]  # [10, 20, 30, 40, 50] |
-| a.remove() | **Remove an item by value**<br />l = ['Alice', 'Bob', 'Charlie', 'Bob', 'Dave']  l.remove('Alice') <br /># ['Bob', 'Charlie', 'Bob', 'Dave'] |
-| a.pop()    | **Remove an item by index and get its value**<br />a = [0, 10, 20, 30, 40, 50] <br />print(l.pop(0)) #0 # [10, 20, 30, 40, 50] |
-| a.clear()  | **Remove all items**                                         |
+| Methods          | Description                                                  |
+| :--------------- | :----------------------------------------------------------- |
+| del a[0]         | **Remove items by index or slice**<br />l = [0, 10, 20, 30, 40, 50]  del l[0]  # [10, 20, 30, 40, 50] |
+| a.remove(): O(N) | **Remove an item by value**<br />l = ['Alice', 'Bob', 'Charlie', 'Bob', 'Dave']  l.remove('Alice') <br /># ['Bob', 'Charlie', 'Bob', 'Dave'] |
+| a.pop()          | **Remove an item by index and get its value**<br />a = [0, 10, 20, 30, 40, 50] <br />print(l.pop(0)) #0 # [10, 20, 30, 40, 50] |
+| a.clear()        | **Remove all items**                                         |
 
 #### Add an item
 
 | Methods                       | Description                                                  |
 | :---------------------------- | :----------------------------------------------------------- |
-| a.append('abc')               | Add an item to a list<br />l.append([3, 4, 5]), # [0, 1, 2, 100, [3, 4, 5]] |
+| a.append('abc') : O(1)        | Add an item to a list<br />l.append([3, 4, 5]), # [0, 1, 2, 100, [3, 4, 5]] |
 | a.extend([10, 11]), `+`, `+=` | Combine lists<br />a = [0, 1, 2], # [0, 1, 2, 10, 11]<br />a +=[10, 11] # [0, 1, 2, 10, 11] |
-| a.insert(1, 100)              | Insert an item into a list<br />a= ['a', 'b', 'c']  a.insert(1, 100) # ['a', 100, 'b', 'c'] |
+| a.insert(1, 100): O(N)        | Insert an item into a list<br />a= ['a', 'b', 'c']  a.insert(1, 100) # ['a', 100, 'b', 'c'] |
 
 #### The others
 
-| Methods               | Description                                                  |
-| :-------------------- | :----------------------------------------------------------- |
-| a.sort(reverse=False) | *Sort* the *list* ascending by default.                      |
-| a.reverse()           | Reverses the sorting order of the elements.                  |
-| a.index(3)            | Returns the position at the first occurrence of the specified value. a = [1, 2, 3] #2 |
-| a.count(1)            | a = [1, 2, 3, 1] #2                                          |
-|                       |                                                              |
+| Methods                         | Description                                                  |
+| :------------------------------ | :----------------------------------------------------------- |
+| a.sort(reverse=False): O(NlogN) | *Sort* the *list* ascending by default.                      |
+| a.reverse(): O(N)               | Reverses the sorting order of the elements.                  |
+| a.index(3)                      | Returns the position at the first occurrence of the specified value. a = [1, 2, 3] #2 |
+| a.count(1): O(N)                | a = [1, 2, 3, 1] #2                                          |
+|                                 |                                                              |
 
 ### List Comprehension
 
@@ -161,6 +161,16 @@ print(newlist) #['apple', 'banana', 'mango']
 a=[1,2,3,4]
 result = [num * 3 for num in a if num %2 == 0] #[6, 12]
 print(result)
+```
+
+#### Initialize a list with the given size
+
+```python
+# N * M
+n = 4
+m = 3
+array = [ [0]*m for _ in range(n) ] # Not [ [0]*m ] * n 
+#Underscore : as a variable in looping
 ```
 
 
@@ -253,3 +263,210 @@ print(s1 - s2)
 | a.add(32)                | Add an item to a set<br />Initial Set: {34, 12, 21, 54} Updated Set: {**32**, 34, 12, 21, 54} |
 | a.update(tech_companies) | Update the set with items of other collection types (lists, tuples, sets, etc).<br />companies = {'Lacoste', 'Ralph Lauren'} tech_companies = ['apple', 'google', 'apple']<br /># Output: {'google', 'apple', 'Lacoste', 'Ralph Lauren'} |
 | a.items()                | Returns the key-value pairs of the dictionary as tuples in a list. |
+
+# Input
+
+## How to take integer input
+
+```python
+n = int(input())
+
+data = list(map(int, input().split())) #From string to integer
+
+import sys
+data = sys.stdin.readline().rstrip()
+print(data)
+
+#used for the addition of any string at the end of the output of the python print statement.
+print(7, end = " ")
+```
+
+# Conditions
+
+## Pass statement
+
+When the `pass` statement is executed, nothing happens, but you avoid getting an error when empty code is not allowed.
+
+```python
+def myfunction():
+  pass
+
+class Person:
+  pass
+
+if b > a:
+  pass
+```
+
+## Conditional Expression
+
+```python
+score = 85
+result = "Success" if score >= 80 else "Fail" #Success
+```
+
+# For & While Loops
+
+```python
+# While loop
+i = 1
+result = 0
+
+while i <= 9:
+  if i % 2 == 1:
+    result += i
+  i += 1
+  
+print(result)
+
+# For loop
+result = 0
+for i in range(1, 10):
+  result += i
+  print(result) #Sum of 1- 9: 45
+  
+```
+
+## Break statement in For Loop
+
+Breakpoint is a unique function in For Loop that allows you to break or terminate the execution of the for loop. We declared the numbers from 10-20, but we want that our for loop to terminate at number 15 and stop executing further.
+
+```python
+for x in range (10,20):
+			if (x == 15): break
+			print(x)
+```
+
+## Continue statement in For Loop
+
+`Continue function`, as the name indicates, will `terminate the current iteration` of the for loop `BUT will continue execution of the remaining iterations`. In our example, we have declared values 1-9, but between these numbers, we only want those numbers that are NOT  divisible by 2.
+
+```python
+#Sum of odd integers from 1 to 9
+result = 0
+for i in range(1, 10):
+  if i % 2 == 0: continue
+  result += i
+print(result) # 25
+```
+
+## Enumerate() in For Loop
+
+**enumerate()** is a built-in function used for assigning an index to each item of the iterable object. It adds a loop on the iterable objects while keeping track of the current item and returns the object in an enumerable form. This object can be used in a for loop to convert it into a list by using list() method.
+
+```python
+#use a for loop over a collection
+Months = ["Jan","Feb","Mar","April","May","June"]
+for i, m in enumerate (Months):
+		print(i,m)
+    
+0 Jan
+1 Feb
+2 Mar
+3 April
+4 May
+5 June
+```
+
+# Function
+
+## Global variables
+
+When you create a variable inside a function, that variable is local and can only be used inside that function. If you use the `global` keyword, the variable belongs to the global scope:
+
+```python
+def myfunc():
+  global x
+  x = "fantastic"
+
+myfunc()
+print("Python is " + x) # Python is fantastic
+```
+
+## Multiple returns
+
+As you already know, a function can return a single variable, but it can also return multiple variables.
+
+```python
+def getPerson():
+    name = "Leona"
+    age = 35
+    country = "UK"
+    return name,age,country
+
+name,age,country = getPerson()
+```
+
+## Lambda function 
+
+In Python, a lambda function is a special type of function without the function name. 
+
+> ```python
+> lambda argument(s) : expression 
+> 
+> greet = lambda : print('Hello World')
+> greet() #Call the lambda
+> ```
+
+- `argument(s)` - any value passed to the lambda function
+- `expression` - expression is executed and returned
+
+```python
+print( (lambda a, b: a + b)(3, 7) ) #10
+```
+
+# Built-in Functions
+
+### **sorted**()
+
+sorted( [9, 1, 8, 5, 4], *reverse=True*) : Return a new sorted list from the items in *iterable*. #[9, 8, 5, 4, 1]
+
+```python
+array = [('Hailey', 34), ('James', 30), ('Mike', 29)]
+result = sorted(array, key = lambda x: x[1], reverse=True)
+print(result)
+```
+
+### **counter()**
+
+```python
+from collections import Counter
+counter = Counter(['red', 'blue', 'red', 'green', 'blue', 'blue'])
+print(counter['blue'])
+print(counter['green'])
+print(dict(counter))
+```
+
+
+
+### **Permutations** and **Combination**
+
+```python
+from itertools import permutations
+data = ['A','B','C']
+result = list(permutations(data, 3))
+print(result)
+
+from itertools import combinations
+result = list(combinations(data, 2))
+print(result)
+
+from itertools import combinations_with_replacement
+result = list(combinations_with_replacement(data, 2))
+print(result)
+```
+
+### **GCD** and **LCM**
+
+```python
+import math
+
+def lcm(a, b)
+		return a * b // math.gcd(a, b)
+
+a = 21
+b = 14
+print(math.gcd(21, 14))
+print(math.lcm (21, 14))
+```
+
