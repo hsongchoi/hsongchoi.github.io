@@ -89,7 +89,7 @@ O(N). n의 길이만큼 순회하며 진행합니다.
 | 3    | 30   | 12   |
 | 4    | 12   | 6    |
 
-
+풀이과정
 ```python
 def GCD(a, b):
     if a % b == 0:
@@ -129,7 +129,7 @@ The DFS algorithm works as follows:
 
 ## Example 1
 
-![image-20230430164405874](/../images/2023-04-30-Graph_based_DSA/image-20230430164405874.png)
+![image-20230430164405874](/images/2023-04-30-Graph_based_DSA/image-20230430164405874.png)
 
 [Step 1] 시작 노드인 '1'을 스택에 삽입하고 방문처리를 한다.
 
