@@ -318,7 +318,7 @@ The time complexity of the DFS algorithm is represented in the form of `O(V + E)
 
 The space complexity of the algorithm is `O(V)`.
 
-## Application
+## Applications
 
 1. To find the path
 2. To test if the graph is bipartite
@@ -465,6 +465,21 @@ dy = [0,0,-1,1]
 # BFS를 수행한 결과 출력
 print(bfs(0,0))
 ```
+
+## Complexity
+
+The time complexity of the BFS algorithm is represented in the form of `O(V + E)`, where V is the number of nodes and E is the number of edges.
+
+The space complexity of the algorithm is `O(V)`.
+
+## Applications
+
+1. To build index by search index
+2. For GPS navigation
+3. Path finding algorithms
+4. In Ford-Fulkerson algorithm to find maximum flow in a network
+5. Cycle detection in an undirected graph
+6. In [minimum spanning tree](https://www.programiz.com/dsa/spanning-tree-and-minimum-spanning-tree)
 
 # DFS, BFS 문제 구분
 
