@@ -8,15 +8,33 @@ search: true
 use_math: true
 ---
 
-# Binary Search
+# Linear Search (순차 탐색)
 
-- 순차 탐색: 리스트 안에 있는 특정한 데이터를 찾기 위해 앞에서부터 데이터를 하나씩 확인하는 방법
+Linear search is a sequential searching algorithm where we start from one end and check every element of the list until the desired element is found. It is the simplest search algorithm.
 
-  `- 보통 정렬되지 않은 리스트에서 데이터를 찾아야 할 때 사용한다.`
+- 리스트 안에 있는 특정한 데이터를 찾기 위해 앞에서부터 데이터를 하나씩 확인하는 방법
+- 보통 정렬되지 않은 리스트에서 데이터를 찾아야 할 때 사용한다.
+- 리스트 내에 데이터가 아무리 많아도 시간만 충분하다면 항상 원하는 원소(데이터)를 찾을 수 있다는 장점이 있다.
 
-  `- 리스트 내에 데이터가 아무리 많아도 시간만 충분하다면 항상 원하는 원소(데이터)를 찾을 수 있다는 장점이 있다.`
-  
-  `- 데이터의 개수가 N개일 때 최대 N번의 비교 연산이 필요하므로 순차 탐색의 최악의 경우 시간 복잡도는 O(N)이다.`
+## Working on Linear Search
+
+The following steps are followed to search for an element `k = 1` in the list below.
+
+![Initial array](https://cdn.programiz.com/sites/tutorial2program/files/linear-search-initial-array.png)Array to be searched for
+
+1. Start from the first element, compare `k`  with each element `x` (Compare with each element).
+
+   ![Element not found](https://cdn.programiz.com/sites/tutorial2program/files/linear-search-comparisons.png)
+
+2. If `x == k`, return the index.
+
+   ![Element found](https://cdn.programiz.com/sites/tutorial2program/files/linear-search-found.png)
+
+3. Else, return `not found`.
+
+## Source Code
+
+
 
 ```python
 # 순차 탐색 소스코드 구현
@@ -39,13 +57,34 @@ array = input().split()
 print(sequential_search(n, target, array))
 ```
 
-- 이진 탐색: 정렬되어 있는 리스트에서 탐색 범위를 절반씩 좁혀가며 데이터를 탐색하는 방법
-  `이진 탐색은 시작점, 끝점, 중간점을 이용하여 탐색 범위를 설정한다.`
+## Complexity
 
-## Working of Binary Search
+**Time Complexity:** $O(N)$
 
-- 이미 정렬된 10개의 데이터 중에서 값이 4인 원소를 찾는 예시를 살펴봅시다.
-  ![img](https://velog.velcdn.com/images/yeahxne/post/799fbda2-c5b7-4d95-9398-35766b343865/image.png)
+데이터의 개수가 N개일 때 최대 N번의 비교 연산이 필요하므로 순차 탐색의 최악의 경우 시간 복잡도는 O(N)이다.
+
+**Space Complexity:** $O(1)$
+
+## Applications
+
+For searching operations in smaller arrays (<100 items).
+
+# Binary Search (이진 탐색)
+
+Binary Search is a searching algorithm for finding an element's position in a sorted array.
+
+In this approach, the element is always searched `in the middle of a portion of an array.`
+
+- 정렬되어 있는 리스트에서 탐색 범위를 절반씩 좁혀가며 데이터를 탐색하는 방법
+
+- `이진 탐색은 시작점, 끝점, 중간점을 이용하여 탐색 범위를 설정한다.`
+
+> Binary search can be implemented only on a sorted list of items. If the elements are not sorted already, we need to sort them first.
+
+## Working on Binary Search
+
+이미 정렬된 10개의 데이터 중에서 값이 4인 원소를 찾는 예시를 살펴봅시다.
+![img](https://velog.velcdn.com/images/yeahxne/post/799fbda2-c5b7-4d95-9398-35766b343865/image.png)
 
 `[Step 1]` 시작점: 0, 끝점: 9, 중간점: 4(소수점 이하 제거)
 ![img](https://velog.velcdn.com/images/yeahxne/post/da81287f-7738-482f-9195-f3a5203dbb7e/image.png)
@@ -66,10 +105,20 @@ print(sequential_search(n, target, array))
 > >- 전체 데이터의 개수는 10개이지만, 이진 탐색을 이용해 총 3번의 탐색으로 원소를 찾을 수 있다.`
 > >`- 절반씩 데이터를 줄어들도록 만든다는 점은 앞서 다룬 퀵 정렬과 공통점이 있다.
 
-## Time Complexity
+## Complexity
 
-- 단계마다 탐색 범위를 2로 나누는 것과 동일하므로 연산 횟수는 *l**o**g*2*N*에 비례한다.
-- 다시 말해 이진 탐색은 탐색 범위를 절반씩 줄이며, 시간 복잡도는 *O*(*l**o**g**N*)을 보장한다.
+**Time Complexities**
+
+- **Best case complexity**: `O(1)`
+- **Average case complexity**: `O(log N)`
+- **Worst case complexity**: `O(log N)`
+
+**Space Complexity**
+
+The space complexity of the binary search is `O(1)`.
+
+- 단계마다 탐색 범위를 2로 나누는 것과 동일하므로 연산 횟수는 log 2N에 비례한다.
+- 다시 말해 이진 탐색은 탐색 범위를 절반씩 줄이며, 시간 복잡도는 O(log N)을 보장한다.
 
 > 예를 들어 초기 데이터 개수가 32개일 때,
 >
@@ -77,7 +126,7 @@ print(sequential_search(n, target, array))
 > 2. 2단계를 거치면 8개가량의 데이터만 남는다.
 > 3. 3단계를 거치면 4개가량의 데이터만 남는다.
 
-## Source code1:Recursive
+## Source code 1: Recursive
 
 ```python
 # 이진 탐색 소스코드 구현 (재귀 함수)
@@ -108,7 +157,7 @@ else:
 	print(result+1)
 ```
 
-## Source code2
+## Source code 2
 
 ```python
 # 이진 탐색 소스코드 구현(반복문)
@@ -139,8 +188,8 @@ else:
 
 ## Libraries
 
-- bisect_left(a,x): 정렬된 순서를 유지하면서 배열 a에 x를 삽입할 가장 왼쪽 인덱스를 반환
-- bisect_right(a,x): 정렬된 순서를 유지하면서 배열 a에 x를 삽입할 가장 오른쪽 인덱스를 반환
+- **bisect_left(a, x)**: 정렬된 순서를 유지하면서 배열 a에 x를 삽입할 가장 왼쪽 인덱스를 반환
+- **bisect_right(a, x)**: 정렬된 순서를 유지하면서 배열 a에 x를 삽입할 가장 오른쪽 인덱스를 반환
 
 ![image-20230501145508313](/images/2023-05-01-Searching/image-20230501145508313.png)
 
