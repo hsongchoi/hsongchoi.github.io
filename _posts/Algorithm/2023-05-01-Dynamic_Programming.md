@@ -319,9 +319,11 @@ print(d[x]) #3
 
 ![img](https://velog.velcdn.com/images/yeahxne/post/d1494813-a83f-4903-b89c-10093c554bf2/image.png)
 
-![image-20230502154150194](/images/2023-05-01-Dynamic_Programming/image-20230502154150194.png)
+![image-20230502154150194](../images/2023-05-01-Dynamic_Programming/image-20230502154150194.png)
 
 - When k = 2, $a_i$ = 각 금액(인덱스)  $i$를 만들 수 있는 최소한의 화폐 갯수.
+
+  
 
 ![image-20230502154240257](/../images/2023-05-01-Dynamic_Programming/image-20230502154240257.png)
 
@@ -345,28 +347,38 @@ d = [10001]*(m + 1)
 # 다이나믹 프로그래밍(Dynamic Programming) 진행(보텀업)
 d[0] = 0
 for i in range(n): #각각의 화폐단위
-	for j in range(array[i], m+1): #각각의 화폐금액
-    	if d[j-array[i]] !- 10001:  # (i-k)원을 만드는 방법이 존재하는 경우
-        	d[j] = min(d[j], d[j-array[i]]+1)
+    for j in range(array[i], m + 1):
+        if d[j-array[i]] != 10001:
+            d[j] = min(d[j], d[j-array[i]]+1)
 
 # 계산된 결과 출력
 if d[m] == 10001:  # 최종적으로 M원을 만드는 방법이 없는 경우
 	print(-1)
 else:
 	print(d[m])
+  
+#입력: 3 7
+#2
+#3
+#5
+#2
 ```
 
 # Example 4: 금광
 
 - nxm 크기의 금광이 있습니다. 금강은 1x1 크기의 칸으로 나누어져 있으며, 각 칸은 특정한 크기의 금이 들어 있습니다.
 - 채굴자는 첫 번째 열부터 출발하여 금을 캐기 시작합니다. 맨 처음에는 첫 번째 열의 어느 행에서든 출발할 수 있습니다.
--  이후에 m-1번에 걸쳐서 매번 오른쪽 위, 오른쪽, 오른쪽 아래 3가지 중 하나의 위치로 이동해야 합니다. 
+-  이후에 m-1번에 걸쳐서 매번 오른쪽 위,  오른쪽,  오른쪽 아래 3가지 중 하나의 위치로 이동해야 합니다. 
 - 결과적으로 채굴자가 얻을 수 있는 금의 최대 크기를 출력하는 프로그램을 작성하세요.
   ![img](https://velog.velcdn.com/images/yeahxne/post/a730e2c3-9f16-4f91-8159-a7da39c8bfac/image.png)
 
 ![img](https://velog.velcdn.com/images/yeahxne/post/23d73a1c-00b8-4817-be04-2f3f821f2e5d/image.png)
 
+![image-20230502163624265](/images/2023-05-01-Dynamic_Programming/image-20230502163624265.png)
+
 ![img](https://velog.velcdn.com/images/yeahxne/post/9f2af5c9-22fe-4afa-a566-66903704aaea/image.png)
+
+
 
 ![img](https://velog.velcdn.com/images/yeahxne/post/5a8f5ae3-1bed-4d6d-8020-32d8112a7faf/image.png)
 
@@ -388,7 +400,7 @@ for tc in range(int(input())):
     	dp.append(array[index:index+m])
         index += m
         
-    # 다이나믹 프로그래밍 진행
+    # 다이나믹 프로그래밍 진행 (Bottom-up)
     for j in range(1,m):
     	for i in range(n):
         	# 왼쪽 위에서 오는 경우
@@ -403,7 +415,7 @@ for tc in range(int(input())):
             	left_down = dp[i+1][j-1]
             # 왼쪽에서 오는 경우
             left = dp[i][j-1]
-            dp[i][j] = dp[i][j]+max(left_up, left_down, left)
+            dp[i][j] = dp[i][j] + max(left_up, left_down, left)
     result = 0
     for i in range(n):
     	result = max(result, dp[i][m-1])
@@ -412,6 +424,7 @@ for tc in range(int(input())):
 
 # Example 5: 병사 배치하기
 
+- 부분 수열의 최대 길이!
 - N명의 병사가 무작위로 나열되어 있습니다. 각 병사는 특정한 값의 전투력을 보유하고 있습니다.
 - 병사를 배치할 때는 전투력이 높은 병사가 앞쪽에 오도록 내림차순으로 배치를 하고자 한다. 다시 말해 앞쪽에 있는 병사의 전투력이 항상 뒤쪽에 있는 병사보다 높아야 한다.
 - 또한 배치 과정에서는 특정한 위치에 있는 병사를 열외시키는 방법을 이용합니다. 그러면서도 남아 있는 병사의 수가 최대가 되도록 하고 싶습니다.
