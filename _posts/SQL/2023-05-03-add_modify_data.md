@@ -7,3 +7,23 @@ typora-root-url: ../
 search: true
 use_math: true
 ---
+
+# Add data to a table
+
+## INSERT
+
+
+
+# Modify data in a table
+
+## UPDATE
+
+
+
+## DELETE
+
+# Remove data from a table
+
+
+
+## 
