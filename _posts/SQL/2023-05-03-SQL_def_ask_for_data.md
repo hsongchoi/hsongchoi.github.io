@@ -59,7 +59,7 @@ The SELECT keyword tells `the database` we want some information returned to us.
 - We can change the order of the fields too.
 - Wild card operator: the star or asterisk. *
 
-### Mathematics
+### Aggregate Window Functions
 
 #### 1) COUNT ()
 
@@ -171,16 +171,14 @@ WHERE state_code like 'C%';
 - This tells the database to match the letter C, and then whatever comes after it, we don't care about, regardless of how much information follows the letter C. e="CA", OR state_code="CO", OR state_code="CT", and so on. Or we could say state_code LIKE 'C%' 
 - This is `not case-sensitive`. I am using capital letters in my condition, but it’s matching lowercase ones.
 
-## 3. LIMIT n
+## 3. GROUP BY
 
-- Select first n rows for all columns
--  If I wanted to see a specific range of them, like the second set of five, I could use `the offset command` to tell the database `to skip some records` before counting off my five.
+- Groups rows that have the same values.
 
 ```sql
-SELECT *
-FROM people
-WHERE state code like 'C%'
-LIMIT 5 OFFSET 5; #The results will be limited to 10 records, skipping the first five records.
+SELECT SUM(salary) AS total_salary, department
+FROM employees
+GROUP BY department
 ```
 
 ## 4. ORDER BY
@@ -202,7 +200,85 @@ FROM people
 ORDER BY state_code, last_name DESC;
 ```
 
-## 5. Functions: Finding information about the data
+## 5. LIMIT n
+
+- Select the first n rows for all columns
+- If I wanted to see a specific range of them, like the second set of five, I could use `the offset command` to tell the database `to skip some records` before counting off my five.
+
+```sql
+SELECT *
+FROM people
+WHERE state code like 'C%'
+LIMIT 5 OFFSET 5; #The results will be limited to 10 records, skipping the first five records.
+```
+
+## 6. HAVING
+
+- In SQL, aggregation functions such as SUM, AVG, MAX, MIN, and COUNT can not be used in the WHERE clauses. If we want to filter our table by an aggregation function, we need to use the HAVING clauses.
+
+Ex) Which departments have more than 50 employees?
+
+```sql
+SELECT COUNT(*) AS total_employee, department
+FROM employees
+GROUP BY department
+HAVING COUNT(*) > 50
+```
+
+# Subqueries
+
+A subquery is a SQL query nested inside a larger query. A subquery may occur in:
+
+- a SELECT clause
+- a FROM clause
+- a WHERE clause
+
+Query first_name, department, and salary of each employee and also the maximum salary given.
+
+```sql
+SELECT first_name, department, salary,
+(SELECT max(salary) FROM employees)
+FROM employees
+```
+
+![image-20230503170247651](/images/2023-05-03-SQL_def_ask_for_data/image-20230503170247651.png)
+
+```sql
+SELECT first_name, salary, department, round((SELECT AVG(salary)
+FROM employees e2
+WHERE el.department = e2.department
+GROUP BY department )) as avg_salary_by_department
+FROM employees el
+WHERE salary > (SELECT AVG(salary)
+FROM employees e2
+WHERE el.department = e2.department
+GROUP BY department )
+ORDER BY salary
+```
+
+![image-20230503170432487](/images/2023-05-03-SQL_def_ask_for_data/image-20230503170432487.png)
+
+# Case When Clause
+
+The CASE statement is used to implement the logic where you want to set the value of one column depending on the values in other columns.
+
+>  It is similar to the IF-ELSE statement in Excel.
+
+Write a query to print the first name, salary, and average salary as well as a new column that shows whether employees' salary is higher than average or not.
+
+```sql
+SELECT first_name, salary, (SELECT ROUND(AVG(salary)) FROM employees) as
+average_salary,
+(CASE WHEN salary > (SELECT AVG(salary) FROM employees) THEN 'higher_than_average'
+ELSE 'lower _than_average' END) as Salary_Case
+FROM employees
+```
+
+![image-20230503170752211](/images/2023-05-03-SQL_def_ask_for_data/image-20230503170752211.png)
+
+# Functions
+
+## 1. Length
 
 It tells us how long the information in the given field is in characters rather than the value of the field itself.
 
@@ -213,6 +289,8 @@ SELECT first_name, length(first_name)
 FROM people
 ```
 
+## 2. DISTINCT
+
 Let's take a look at pulling out only the unique values or the values that are distinct from one another with the DISTINCT function. 
 
 ```sql
@@ -221,3 +299,51 @@ FROM people
 ORDER by frst_name;
 ```
 
+## 3. Date Functions
+
+In PostgreSQL, you can easily extract values from date columns. You will see the most used date functions below.
+
+```sql
+SELECT
+date_part ('year', hire_date) as year,
+date part ( 'month', hire_date as month,
+date_part ('day', hire_date) as day,
+date_part ( 'dow', hire_date) as dayofweek,
+to_char(hire date, 'Dy') as day_name,
+to_char(hire date, 'Month') as month name,
+hire date
+FROM employees
+```
+
+## 4. Window Functions
+
+Window functions aggregate and ranking functions over a particular window (set of rows). 
+
+- OVER clause is used with window functions to define that window. OVER clause does two things:
+- **PARTITION BY**: Partitions rows to form the set of rows
+- **ORDER BY**: Orders rows within those partitions into a particular order
+
+### Aggregate window functions
+
+: Aggregate functions applied over a particular window (set of rows)
+
+```sql
+SELECT first_name, salary, department,
+ROUND( AVG(salary) OVER (PARTITION BY department)) as avg_sales_by_dept
+FROM employees
+ORDER BY salary DESC
+```
+
+![image-20230503164913088](/images/2023-05-03-SQL_def_ask_for_data/image-20230503164913088.png)
+
+### Rank () Function
+
+: A window function that assigns a rank to each row within a partition of a result set. A rank value of 1 is the highest salary value.
+
+```sql
+SELECT first_name, salary, 
+RANK() OVER(ORDER BY salary DESC)
+FROM employees
+```
+
+![image-20230503164935259](/images/2023-05-03-SQL_def_ask_for_data/image-20230503164935259.png)
