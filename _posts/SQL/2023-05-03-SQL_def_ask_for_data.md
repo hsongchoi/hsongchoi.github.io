@@ -1,6 +1,6 @@
 ---
 title:  "SQL: Definitions and Ask for Data from a Database"
-categories: ML
+categories: SQL
 tag: [SQL, Data_Cleaning]
 author_profile: false
 typora-root-url: ../
