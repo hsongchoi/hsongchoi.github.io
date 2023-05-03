@@ -63,7 +63,7 @@ The SELECT keyword tells `the database` we want some information returned to us.
 
 #### 1) COUNT ()
 
-```SQL
+```sql
 SELECT SUM(quiz_points) / COUNT(*)
 FROM people
 GROUP BY team;
@@ -75,7 +75,7 @@ Remember, these math operations that we can do, in this case division, are integ
 
 #### 2) AVG()
 
-```SQL
+```sql
 SELECT team, COUNT(*), SUM(quiz_points), AVG(quiz_points)
 FROM people
 GROUP BY team;
@@ -83,14 +83,14 @@ GROUP BY team;
 
 #### 3) SUM()
 
-```SQL
+```sql
 SELECT SUM(quiz_points)
 FROM people;
 ```
 
 #### 4) MAX(), MIN()
 
-```SQL
+```sql
 SELECT MAX(quiz_points), MIN(quiz_points)
 FROM people;
 ```
@@ -99,7 +99,7 @@ FROM people;
 
 #### 1) LOWER(), UPPER()
 
-```SQL
+```sql
 SELECT LOWER(first_name), UPPER(last_name)
 FROM people;
 ```
