@@ -1,5 +1,5 @@
 ---
-title:  "SQL: Definitions and Commands"
+title: "SQL: Definitions and Commands"
 categories: SQL
 tag: [SQL, Data_Cleaning]
 author_profile: false
@@ -37,7 +37,7 @@ A collection of Information.
 
 <img src="/images/2023-05-03-SQL_def_ask_for_data/image-20230503060302080.png" alt="image-20230503060302080" style="zoom:50%;" />
 
-These clauses **are constructed out of** various elements, including **keywords**, which are special or reserved words that tell the database to take some action, **field names**, which let us refer to fields or columns of data whose values we want to use, **table names**, which tell the database which table to use, and **predicates**, which we use to specify what information or condition we're looking for. 
+These clauses **are constructed out of** various elements, including **keywords**, which are special or reserved words that tell the database to take some action, **field names**, which let us refer to fields or columns of data whose values we want to use, **table names**, which tell the database which table to use, and **predicates**, which we use to specify what information or condition we're looking for.
 
 <img src="/images/2023-05-03-SQL_def_ask_for_data/image-20230503060322900.png" alt="image-20230503060322900" style="zoom:50%;" />
 
@@ -61,20 +61,39 @@ The SELECT keyword tells `the database` we want some information returned to us.
 
 ### Mathematics
 
-#### 1) Count ()
+#### 1) COUNT ()
 
 ```SQL
-SELECT LOWER(first_name), UPPER(last_name)
-FROM people;
+SELECT SUM(quiz_points) / COUNT(*)
+FROM people
+GROUP BY team;
 ```
 
-If we add a clause to the end using the GROUP BY keyword, we can tell the database to run our SELECT clause **against each individual grouping by the field that we specify.**
+Remember, these math operations that we can do, in this case division, are integer operations if they're being performed on integer values. 
+
+\- So, instead of making an average ourselves, we can use another aggregate function, **AVG, which gives us the average to higher precision.** 
 
 #### 2) AVG()
 
+```SQL
+SELECT team, COUNT(*), SUM(quiz_points), AVG(quiz_points)
+FROM people
+GROUP BY team;
+```
+
 #### 3) SUM()
 
+```SQL
+SELECT SUM(quiz_points)
+FROM people;
+```
+
 #### 4) MAX(), MIN()
+
+```SQL
+SELECT MAX(quiz_points), MIN(quiz_points)
+FROM people;
+```
 
 ### Transforming data
 
