@@ -1,5 +1,5 @@
 ---
-title:  "SQL: Ask for Data from Two or More Tables"
+title:  "SQL: Joins"
 categories: SQL
 tag: [SQL, Data_Cleaning]
 author_profile: false

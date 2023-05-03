@@ -1,5 +1,5 @@
 ---
-title:  "SQL: Definitions and Ask for Data from a Database"
+title:  "SQL: Definitions and Commands"
 categories: SQL
 tag: [SQL, Data_Cleaning]
 author_profile: false
@@ -59,6 +59,63 @@ The SELECT keyword tells `the database` we want some information returned to us.
 - We can change the order of the fields too.
 - Wild card operator: the star or asterisk. *
 
+### Mathematics
+
+#### 1) Count ()
+
+```SQL
+SELECT LOWER(first_name), UPPER(last_name)
+FROM people;
+```
+
+If we add a clause to the end using the GROUP BY keyword, we can tell the database to run our SELECT clause **against each individual grouping by the field that we specify.**
+
+#### 2) AVG()
+
+#### 3) SUM()
+
+#### 4) MAX(), MIN()
+
+### Transforming data
+
+#### 1) LOWER(), UPPER()
+
+```SQL
+SELECT LOWER(first_name), UPPER(last_name)
+FROM people;
+```
+
+#### 2) SUBSTR( , , )
+
+In most SQL implementations, substring is the name of the function. But here in SQLite, it's SUBSTR, which is a substring of the word substring. 
+
+: A number representing at which character in the longer string to start counting and the length after which to stop in characters. I want to start with the first character and then proceed with five characters after that to get the first five characters of the last_name field. 
+
+```sql
+SELECT first_name, SUBSTR(last_name, 1, 5)
+FROM people;
+```
+
+#### 3) REPLACE( , , )
+
+```sql
+SELECT REPLACE (first_name, "a", "-")
+FROM people;
+```
+
+<img src="/images/2023-05-03-SQL_def_ask_for_data/image-20230503155843960.png" alt="image-20230503155843960" style="zoom:50%;" />
+
+- This replacement is case-sensitive, so keep an eye out for that.
+- In fact, if I scroll down here to row 53, Anne still has a capital A because capital A is a different character than lowercase a. 
+
+### Creating aliases with AS
+
+```sql
+SELECT first_name AS firstname, UPPER(last_name) AS surname
+FROM people
+WHERE firstname = 'Laura';
+```
+
 ## 2. WHERE
 
 The WHERE keyword lets us add selection criteria to a statement. These clauses need to be in this order to work.
@@ -69,11 +126,11 @@ FROM people
 WHERE shirt or hat='shirt':
 ```
 
-### Logical operator: **AND**
+### Logical operators
 
+- Select all columns with the filter applied
 - Logical operator/ = IS/ <>/!= IS NOT
 - The database is thinking about those last two conditions as being paired together.
-- Add some parentheses here, 
 
 ```sql
 SELECT first_name, last_name
@@ -97,7 +154,7 @@ WHERE state_code like 'C%';
 
 ## 3. LIMIT n
 
-- tells the database to stop returning results after a given number of them have met our search criteria.
+- Select first n rows for all columns
 -  If I wanted to see a specific range of them, like the second set of five, I could use `the offset command` to tell the database `to skip some records` before counting off my five.
 
 ```sql
@@ -115,7 +172,7 @@ LIMIT 5 OFFSET 5; #The results will be limited to 10 records, skipping the first
 ```sql
 SELECT first_name, last_name
 FROM people
-ORDER BY first name DESC;
+ORDER BY first_name DESC;
 ```
 
 - I can change the last name sort to descending order while the state is still in **the default ascending order.** And here, I can see that the sort order of the states is still the same, but now the records are reordered in `reverse alphabetical sequence` by the last name within the state. 
