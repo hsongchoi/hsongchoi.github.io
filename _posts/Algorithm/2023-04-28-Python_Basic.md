@@ -173,7 +173,39 @@ array = [ [0]*m for _ in range(n) ] # Not [ [0]*m ] * n
 #Underscore : as a variable in looping
 ```
 
+#### How to zip two lists 
 
+##### 1. **Using the built-in zip() function**
+
+```python
+list_a = [1, 3, 4]
+list_b = [5, 7, 11]
+
+list_zip = list(zip(list_a, list_b))
+print(list_zip) 
+#[(1, 5), (3, 7), (4, 11)]
+```
+
+##### 2. **Using map() + __add__**
+
+map() function is another **in-built python method** similar to zip() function above. It enables you to zip the elements of the iterable by **mapping the elements of the first iterable with the elements of the second iterable**. By using the map() function along with the addition operator, you can merge two lists in python as shown in the below example:
+
+```python
+list_1 = [[2, 3], [4, 5], [7, 6]]
+list_2 = [[4, 9], [4, 2], [11, 10]]
+  
+print ("The given list 1 is : " + str(list_1))
+print ("The given list 2 is : " + str(list_2))
+#The given list 1 is : [[2, 3], [4, 5], [7, 6]]
+#The given list 2 is : [[4, 9], [4, 2], [11, 10]]
+
+
+res = list(map(list.__add__, list_1, list_2))
+      
+print ("The zipped list is : " +  str(res))
+
+#The zipped list is : [[2, 3, 4, 9], [4, 5, 4, 2], [7, 6, 11, 10]]
+```
 
 ## Tuples
 
@@ -240,6 +272,7 @@ del student_id[111]
 | a.keys()   | Returns the list of keys.                                    |
 | a.values() | Returns the list of values.                                  |
 | a.items()  | Returns the key-value pairs of the dictionary as tuples in a list. |
+| a.get(key) | Returns the value of the "key"                               |
 
 ## Sets
 
