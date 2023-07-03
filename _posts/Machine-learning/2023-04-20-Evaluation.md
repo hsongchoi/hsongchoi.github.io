@@ -28,16 +28,16 @@ use_math: true
       font-weight: bold;
       padding: 8px;
     }
-
+    
     table.dataframe td {
       text-align: center;
       padding: 8px;
     }
-
+    
     table.dataframe tr:hover {
       background: #b8d1f3; 
     }
-
+    
     .output_prompt {
       overflow: auto;
       font-size: 0.9rem;
@@ -126,6 +126,18 @@ print("Accuracy score: {:.2f}".format(accuracy_score(y_test, pred_logreg)))
 logreg score: 0.98
 Accuracy score: 0.98
 </pre>
+# Imbalanced example
+
+Let’s suppose that we have two classes: C0 and C1. 
+
+- X ~ N(0, 4), Y~N(2, 1)
+- Suppose also that class C0 represents 90% of the dataset (and, so, class C1 represents the remaining 10%). 
+- In the following picture, we have depicted a representative dataset containing 50 points along with the theoretical distributions of both classes in the right proportions.
+
+![image-20230703191832806](/images/2023-04-20-Evaluation/image-20230703191832806.png)
+
+
+
 # Confusion matrices
 
 
@@ -185,9 +197,7 @@ Precision measures how many of the samples predicted as positive are actually po
 
 
 $$
-
 Precision = \frac{TP}{TP + FP}.
-
 $$
 
 
@@ -215,9 +225,7 @@ Precision score: 0.98
 Recall, on the other hand, measures how many of the positive samples are captured by the positive predictions:
 
 $$
-
 Recall = \frac{TP}{TP + FN}.
-
 $$
 
 
@@ -255,9 +263,7 @@ while precision and recall are very important measures, looking at only one of t
 
 
 $$
-
 F_1 = \frac{2}{\frac{1}{recall} + \frac{1}{precision}} = 2 \cdot \frac{precision\cdot recall}{precision + recall}.
-
 $$
 
 
@@ -289,7 +295,7 @@ target_names=["not nine", "nine"]))
 
     not nine       0.99      1.00      0.99       403
         nine       0.98      0.87      0.92        47
-
+    
     accuracy                           0.98       450
    macro avg       0.98      0.93      0.96       450
 weighted avg       0.98      0.98      0.98       450

@@ -274,6 +274,17 @@ del student_id[111]
 | a.items()  | Returns the key-value pairs of the dictionary as tuples in a list. |
 | a.get(key) | Returns the value of the "key"                               |
 
+- `value` if the key is not found and `value` is specified.
+
+```python
+person = {'name': 'Phill', 'age': 22}
+
+print('Name: ', person.get('name'))
+
+# value is provided
+print('Salary: ', person.get('salary', 0))
+```
+
 ## Sets
 
 ```python

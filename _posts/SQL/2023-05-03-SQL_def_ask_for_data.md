@@ -258,6 +258,18 @@ ORDER BY salary
 
 ![image-20230503170432487](/images/2023-05-03-SQL_def_ask_for_data/image-20230503170432487.png)
 
+```sql
+select tb1.salary
+from(
+     select salary, dense_rank() over(order by salary DESC) as dnr
+     from employees
+     where department_id in (select id from departments where name = 'engineering')
+) as tb1
+where tb1.dnr=2
+```
+
+
+
 # Case When Clause
 
 The CASE statement is used to implement the logic where you want to set the value of one column depending on the values in other columns.
@@ -347,3 +359,9 @@ FROM employees
 ```
 
 ![image-20230503164935259](/images/2023-05-03-SQL_def_ask_for_data/image-20230503164935259.png)
+
+### Dense_rank() Function
+
+: A [window function](https://www.sqlservertutorial.net/sql-server-window-functions/) that assigns a rank to each row within a partition of a result set. Unlike the [`RANK()`](https://www.sqlservertutorial.net/sql-server-window-functions/sql-server-rank-function/) function, the `DENSE_RANK()` function returns consecutive rank values. `Rows in each partition receive the same ranks if they have the same values.`
+
+![image-20230524161134947](/images/2023-05-03-SQL_def_ask_for_data/image-20230524161134947.png)
