@@ -79,7 +79,7 @@ use_math: true
   </style>
 </head>
 
-# Categorical variables
+# Encoding for Categorical variables
 
 - Most Machine learning algorithms can not handle categorical variables unless we convert them to numerical values.
 -  Feature engineering is essential, yet it is also arguably one of the most manually intensive steps in the applied ML process.
@@ -100,7 +100,7 @@ use_math: true
 
 ![image-20230703221949599](/images/2023-04-19-Data Preprocessing/image-20230703221949599.png)
 
-# One Hot encoding
+## One Hot encoding
 
 By far, the most common way to represent categorical variables is using the `one-hot encoding` or one-out-of-N encoding, also known as `dummy variables`.
 
@@ -168,7 +168,7 @@ dtype: int64
 >   - This means that N-1 binary variables give complete information about (represent completely) the original categorical variable to the linear Regression. 
 > - Still, for classification, the recommendation is to use all N columns, as most of the tree-based algorithm builds a tree based on all available variables.
 
-## The get_dummies function
+### The get_dummies function
 
 `The get_dummies function` automatically transforms all columns that have object type (like strings) or are categorical.
 
@@ -288,7 +288,7 @@ pd.get_dummies(items)
 </table>
 </div>
 
-# Label Encoding
+## Label Encoding
 
 - In this encoding, each category is assigned **a value from 1 through N** (where N is the number of categories for the feature. 
 - One major issue with this approach is there is no relation or order between these classes, but the algorithm might **consider them as some order or some relationship.**
@@ -300,7 +300,7 @@ pd.get_dummies(items)
 
 ![image-20230703214102936](/images/2023-04-19-Data Preprocessing/image-20230703214102936.png)
 
-# Ordinal Encoding
+## Ordinal Encoding
 
 - This is reasonable only for ordinal variables.
 - We do Ordinal encoding to ensure the encoding of variables retains the ordinal nature of the variable.
@@ -311,13 +311,13 @@ pd.get_dummies(items)
 
 ![image-20230703215127525](/images/2023-04-19-Data Preprocessing/image-20230703215127525.png)
 
-# Helmert Encoding
+## Helmert Encoding
 
 - In this encoding, the mean of the dependent variable for a level is compared to the mean of the dependent variable over all previous levels.
 
 ![image-20230703215519786](/images/2023-04-19-Data Preprocessing/image-20230703215519786.png)
 
-# Binary Encoding
+## Binary Encoding
 
 - Binary encoding converts a category into binary digits.
 - Each binary digit creates one feature column.
@@ -328,14 +328,14 @@ pd.get_dummies(items)
 
 ![image-20230703215910010](/images/2023-04-19-Data Preprocessing/image-20230703215910010.png)
 
-# Frequency Encoding
+## Frequency Encoding
 
 - It is a way to utilize the frequency of the categories as labels.
 - In the cases where the frequency is related somewhat to the target variable, it helps the model understand and assign the weight in direct and inverse proportion, depending on the nature of the data.
 
 ![image-20230703220030806](/images/2023-04-19-Data Preprocessing/image-20230703220030806.png)
 
-# Mean Encoding
+## Mean Encoding
 
 - Mean Encoding or Target Encoding is one viral encoding approach followed by Kagglers. 
 - There are many variations of this.
@@ -361,17 +361,15 @@ There are many variations of this target encoding in practice, like smoothing. S
 
 ![image-20230703221019957](/images/2023-04-19-Data Preprocessing/image-20230703221019957.png)
 
+## Summary of Categorical Encoding
 
+![image-20230703214415862](/images/2023-04-19-Data Preprocessing/image-20230703214415862.png)
 
+# Encoding for Quantitive variables
 
-
-# Binning
-
-
+## Binning
 
 Linear models can only model linear relationships, which are lines in the case of a single feature. The decision tree can build a much more complex model of the data. However, this is **strongly dependent on the representation of the data.**
-
-
 
 One way to make linear models more powerful on continuous data is to use binning (also known as discretization) of the feature to split it up into multiple features.
 
@@ -494,23 +492,58 @@ Text(0.5, 0, 'Input feature')
 
 for predicting on this data. 2. decision trees look at multiple features at once, while binning is usually done on a per-feature basis.
 
-# Summary of Categorical Encoding
-
-![image-20230703214415862](/images/2023-04-19-Data Preprocessing/image-20230703214415862.png)
-
 # Feature scaling
 
+- In many machine learning algorithms, to bring all features in the same standing, we need to do scaling so that one significant number doesn’t impact the model just because of their large magnitude.
+- `Feature scaling` in machine learning is one of the most critical steps during the pre-processing of data before creating a machine learning model.
+- Like most other machine learning steps, feature scaling too is a **trial and error process**, not a single silver bullet.
+- The most common techniques of feature scaling are `Normalization` and `Standardization`.
+  - **Normalization** is used when we want to bound our values between two numbers, typically, between [0,1] or [-1,1].
+  - While **Standardization** transforms the data to have zero mean and a variance of 1, they make our data **unitless**.
 
+## Why need scaling?
 
-`StandardScaler` in `scikit-learn` ensures that for each feature the mean is 0 and the variance is 1, bringing all features to the same magnitude. However, this scaling does not ensure any particular minimum and maximum
+The ML algorithm is sensitive to the “**relative scales of features**.
 
-values for the features.
+1. The feature with a higher value range dominants the other features.
 
+- If there is a vast difference in the range, it makes the underlying assumption that higher ranging numbers have superiority of some sort.
+- These more significant number starts playing a more decisive role while training the model.
 
+![image-20230704000012733](/images/2023-04-19-Data Preprocessing/image-20230704000012733.png)
 
-`RobustScaler` uses the median and quartiles, instead of mean and variance. This makes the RobustScaler ignore outliers.
+- These more significant number of weights starts playing a more decisive role while training the model. 
+- Interestingly, if we convert the weight to “Kg,” then “Price” becomes dominant.
 
+2. Few algorithms like Neural network gradient descent **converge much faster** with feature scaling than without it.
 
+![image-20230704000242875](/images/2023-04-19-Data Preprocessing/image-20230704000242875.png)
+
+3. **Saturation**, like in the case of sigmoid activation in Neural Network, scaling would help not to saturate too fast.
+
+## When to do scaling?
+
+Rule of thumb we may follow here is an algorithm that computes distance or assumes normality, **scales your features.**
+
+Some examples of algorithms where feature scaling matters are:
+
+- **K-nearest neighbors** (KNN) with a Euclidean distance measure is sensitive to magnitudes and hence should be scaled for all features to weigh in equally.
+- **K-Means** uses the Euclidean distance measure here feature scaling matters.
+- Scaling is critical while performing **Principal Component Analysis(PCA)**. PCA tries to get the features with maximum variance, and the variance is high for high magnitude features and skews the PCA towards high magnitude features.
+- We can speed up **gradient descent** by scaling because θ descends quickly on small ranges and slowly on large ranges, and oscillates inefficiently down to the optimum when the variables are very uneven.
+
+Algorithms that do not require normalization/scaling are the ones that **rely on rules**. They would not be affected by any monotonic transformations of the variables. Scaling is a monotonic transformation. 
+
+- Examples of algorithms in this category are all the tree-based algorithms — **CART, Random Forests, Gradient Boosted Decision Trees**. These algorithms utilize rules (series of inequalities) and **do not require normalization**.
+
+Algorithms like **Linear Discriminant Analysis(LDA), Naive Bayes is** by design equipped to handle this and give weights to the features accordingly. Performing features scaling in these algorithms may not have much effect.
+
+### MinMaxScaler
+
+- All of the features are between 0 and 1. 
+- This Scaler shrinks the data within the range of -1 to 1 if there are negative values. 
+- This Scaler responds well if the standard deviation is small and when a distribution is **not Gaussian**.
+- This Scaler is **sensitive to outliers**.
 
 `MinMaxScaler` shifts the data such that all features are exactly between 0 and 1. For the two-dimensional dataset this means all of the data is contained within the rectangle created by the x-axis between 0 and 1 and the y-axis
 
@@ -525,83 +558,6 @@ X_{scaled} = X_{std} * (max - min) + min.
 $$
 
 where max, min represent feature ranges.
-
-
-
-`Normalizer` does a very different kind of rescaling. It scales each data point such that the feature vector has a Euclidean length of 1. In other words, it projects a data point on the circle (or sphere, in the case of higher dimensions) with a radius of 1.
-
-
-
-- SVM, Linear Regression, Logistic Regression assume that data follow the Gaussian distribution.
-
-- It is important to apply exactly `the same transformation to the training set and the test set` for the supervised model to work on the test set.
-
-    - We call fit on the `training set`, and then call transform on the `training and test sets`.
-
-
-## StandardScaler
-
-
-
-```python
-import pandas as pd
-from sklearn.datasets import load_iris
-from sklearn.preprocessing import StandardScaler
-
-
-iris = load_iris()
-iris_df = pd.DataFrame(data = iris.data, columns = iris.feature_names)
-print('Means of the features:\n{}'.format(iris_df.mean()))
-print('Variances of the features:\n{}'.format(iris_df.var()))
-```
-
-<pre>
-Means of the features:
-sepal length (cm)    5.843333
-sepal width (cm)     3.057333
-petal length (cm)    3.758000
-petal width (cm)     1.199333
-dtype: float64
-Variances of the features:
-sepal length (cm)    0.685694
-sepal width (cm)     0.189979
-petal length (cm)    3.116278
-petal width (cm)     0.581006
-dtype: float64
-</pre>
-
-```python
-scaler = StandardScaler()
-scaler.fit(iris_df)
-iris_scaled = scaler.transform(iris_df) #NumPy ndarray
-```
-
-
-```python
-iris_df_scaled = pd.DataFrame(data = iris_scaled, columns = iris.feature_names)
-print('Means of the features:\n{}'.format(iris_df_scaled.mean())) # All means are 0.
-print('Variances of the features:\n{}'.format(iris_df_scaled.var())) # All variances are 1.
-```
-
-<pre>
-Means of the features:
-sepal length (cm)   -1.690315e-15
-sepal width (cm)    -1.842970e-15
-petal length (cm)   -1.698641e-15
-petal width (cm)    -1.409243e-15
-dtype: float64
-Variances of the features:
-sepal length (cm)    1.006711
-sepal width (cm)     1.006711
-petal length (cm)    1.006711
-petal width (cm)     1.006711
-dtype: float64
-</pre>
-## MinMaxScaler
-
-- All of the features are between 0 and 1. If there exist negative numbers, they are between -1 and 1.
-
-
 
 ```python
 from sklearn.preprocessing import MinMaxScaler
@@ -630,6 +586,7 @@ petal width (cm)     1.0
 dtype: float64
 </pre>
 
+
 ```python
 from sklearn.datasets import load_breast_cancer
 from sklearn.model_selection import train_test_split
@@ -645,6 +602,7 @@ print("Test set accuracy: {:.2f}".format(svm.score(X_test, y_test)))
 <pre>
 Test set accuracy: 0.94
 </pre>
+
 
 ```python
 # Preprocessing using 0-1 scaling
@@ -665,6 +623,159 @@ print("Scaled test set accuracy: {:.2f}".format(svm.score(X_test_scaled, y_test)
 <pre>
 Scaled test set accuracy: 0.97
 </pre>
+
+### StandardScaler
+
+- The Standard Scaler assumes data is normally distributed within each feature and scales them such that the distribution centered around 0, with a standard deviation of 1.
+- If data is not normally distributed, this is not the best Scaler to use.
+- However, this scaling does not ensure any particular minimum and maximum values for the features.
+
+```python
+import pandas as pd
+from sklearn.datasets import load_iris
+from sklearn.preprocessing import StandardScaler
+
+
+iris = load_iris()
+iris_df = pd.DataFrame(data = iris.data, columns = iris.feature_names)
+print('Means of the features:\n{}'.format(iris_df.mean()))
+print('Variances of the features:\n{}'.format(iris_df.var()))
+```
+
+<pre>
+Means of the features:
+sepal length (cm)    5.843333
+sepal width (cm)     3.057333
+petal length (cm)    3.758000
+petal width (cm)     1.199333
+dtype: float64
+Variances of the features:
+sepal length (cm)    0.685694
+sepal width (cm)     0.189979
+petal length (cm)    3.116278
+petal width (cm)     0.581006
+dtype: float64
+</pre>
+
+
+```python
+scaler = StandardScaler()
+scaler.fit(iris_df)
+iris_scaled = scaler.transform(iris_df) #NumPy ndarray
+```
+
+
+```python
+iris_df_scaled = pd.DataFrame(data = iris_scaled, columns = iris.feature_names)
+print('Means of the features:\n{}'.format(iris_df_scaled.mean())) # All means are 0.
+print('Variances of the features:\n{}'.format(iris_df_scaled.var())) # All variances are 1.
+```
+
+<pre>
+Means of the features:
+sepal length (cm)   -1.690315e-15
+sepal width (cm)    -1.842970e-15
+petal length (cm)   -1.698641e-15
+petal width (cm)    -1.409243e-15
+dtype: float64
+Variances of the features:
+sepal length (cm)    1.006711
+sepal width (cm)     1.006711
+petal length (cm)    1.006711
+petal width (cm)     1.006711
+dtype: float64
+</pre>
+
+### Max Abs Scaler
+
+- Scale each feature by its maximum absolute value.
+- This estimator scales and translates each feature individually such that the maximal absolute value of each feature in the training set is 1.0.
+- It does not shift/center the data and thus does not destroy any **sparsity**.
+- Cons: On positive-only data, this Scaler behaves similarly to Min Max Scaler and, therefore, also suffers from the presence of significant **outliers**.
+
+![image-20230704002234544](/images/2023-04-19-Data Preprocessing/image-20230704002234544.png)
+
+### Robust Scaler
+
+-  This Scaler is **robust** to outliers.
+- If our data contains many **outliers**, scaling using the mean and standard deviation of the data won’t work well.
+- The centering and scaling statistics of this Scaler are based on percentiles and are therefore not influenced by a few numbers of huge marginal outliers (The RobustScaler ignore outliers.).
+- Note that the outliers themselves are still present in the transformed data. If a **separate outlier clipping** is desirable, a non-linear transformation is required.
+
+![image-20230704002457959](/images/2023-04-19-Data Preprocessing/image-20230704002457959.png)
+
+Let’s now see what happens if we introduce an outlier and see the effect of scaling using Standard Scaler and Robust Scaler (a circle shows outlier).
+
+![image-20230704002541358](/images/2023-04-19-Data Preprocessing/image-20230704002541358.png)
+
+### Quantile Transformer Scaler (**Rank scaler**)
+
+Transform features using quantiles information.
+
+This method transforms the features to follow a **uniform or a normal** distribution. Therefore, for a given feature, this transformation tends to spread out the most frequent values. It also reduces the impact of (marginal) outliers: this is, therefore, a **robust pre-processing** scheme.
+
+The cumulative distribution function of a feature is used to project the original values. Note that this transform is non-linear and may distort linear correlations between variables measured at the same scale but renders variables measured at different scales more directly comparable. This is also sometimes called as **Rank scaler.**
+
+```python
+from sklearn.preprocessing import QuantileTransformer
+scaler = QuantileTransformer()
+df6 = pd.DataFrame(scaler.fit_transform(df),
+                   columns=['WEIGHT','PRICE'],
+                   index = ['Orange','Apple','Banana','Grape'])
+ax = df.plot.scatter(x='WEIGHT', y='PRICE',color=['red','green','blue','yellow'], 
+                     marker = '*',s=80, label='BREFORE SCALING');
+df6.plot.scatter(x='WEIGHT', y='PRICE', color=['red','green','blue','yellow'],
+                 marker = 'o',s=60,label='AFTER SCALING', ax = ax,figsize=(6,4))
+plt.axhline(0, color='red',alpha=0.2)
+plt.axvline(0, color='red',alpha=0.2);
+```
+
+The above example is just for illustration as Quantile transformer is useful when we have a large dataset with many data points usually more than 1000.
+
+### Power Transformer Scaler
+
+The power transformer is a family of parametric, monotonic transformations that are applied to **make data more Gaussian-like**. This is useful for modeling issues related to the variability of a variable that is unequal across the range (heteroscedasticity) or situations where normality is desired.
+
+The power transform finds the optimal scaling factor in stabilizing variance and minimizing skewness through maximum likelihood estimation. Currently, Sklearn implementation of PowerTransformer supports the Box-Cox transform and the Yeo-Johnson transform. The optimal parameter for stabilizing variance and minimizing skewness is estimated through maximum likelihood. Box-Cox requires input data to be strictly positive, while Yeo-Johnson supports both positive or negative data.
+
+```python
+from sklearn.preprocessing import PowerTransformer
+scaler = PowerTransformer(method='yeo-johnson')
+df5 = pd.DataFrame(scaler.fit_transform(df),
+                   columns=['WEIGHT','PRICE'],
+                   index = ['Orange','Apple','Banana','Grape'])
+ax = df.plot.scatter(x='WEIGHT', y='PRICE',color=['red','green','blue','yellow'], 
+                     marker = '*',s=80, label='BREFORE SCALING');
+df5.plot.scatter(x='WEIGHT', y='PRICE', color=['red','green','blue','yellow'],
+                 marker = 'o',s=60,label='AFTER SCALING', ax = ax)
+plt.axhline(0, color='red',alpha=0.2)
+plt.axvline(0, color='red',alpha=0.2);
+```
+
+![image-20230704003051614](/images/2023-04-19-Data Preprocessing/image-20230704003051614.png)
+
+### Unit Vector Scaler
+
+![image-20230704003120987](/images/2023-04-19-Data Preprocessing/image-20230704003120987.png)
+
+Scaling is done considering the whole feature vector to be of unit length. This usually means dividing each component by the Euclidean length of the vector (L2 Norm). In some applications (e.g., histogram features), it can be more practical to use the L1 norm of the feature vector.
+
+Like Min-Max Scaling, the Unit Vector technique produces values of range [0,1]. When dealing with features with hard boundaries, this is quite useful. For example, when dealing with image data, the colors can range from only 0 to 255.
+
+![image-20230704003201861](/images/2023-04-19-Data Preprocessing/image-20230704003201861.png)
+
+If we plot, then it would look as below for L1 and L2 norm, respectively.
+
+![image-20230704003232863](/images/2023-04-19-Data Preprocessing/image-20230704003232863.png)
+
+`Normalizer` does a very different kind of rescaling. It scales each data point such that the feature vector has a Euclidean length of 1. In other words, it projects a data point on the circle (or sphere, in the case of higher dimensions) with a radius of 1.
+
+- SVM, Linear Regression, Logistic Regression assume that data follow the Gaussian distribution.
+
+- It is important to apply exactly `the same transformation to the training set and the test set` for the supervised model to work on the test set.
+
+    - We call fit on the `training set`, and then call transform on the `training and test sets`.
+
 
 
 # References
