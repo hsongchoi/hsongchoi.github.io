@@ -28,16 +28,16 @@ use_math: true
       font-weight: bold;
       padding: 8px;
     }
-
+    
     table.dataframe td {
       text-align: center;
       padding: 8px;
     }
-
+    
     table.dataframe tr:hover {
       background: #b8d1f3; 
     }
-
+    
     .output_prompt {
       overflow: auto;
       font-size: 0.9rem;
@@ -79,10 +79,34 @@ use_math: true
   </style>
 </head>
 
+# Categorical variables
+
+- Most Machine learning algorithms can not handle categorical variables unless we convert them to numerical values.
+-  Feature engineering is essential, yet it is also arguably one of the most manually intensive steps in the applied ML process.
+-  Handling non-numeric data is a critical component of nearly every machine-learning process. 
+- Many algorithms’ performances vary based on how Categorical variables are encoded.
+- Categorical variables can be divided into two categories: Nominal (No particular order: Red, Yellow, Pink, Blue) and Ordinal (some ordered: Red, Yellow, Pink, Blue).
+- My recommendation will be to try each of these with the smaller datasets and then decide where to focus on tuning the encoding process.
+
+> We need to use the mapping values created at the time of training. 
+>
+> This process is the same as scaling or normalization, where we use the train data to scale or normalize the test data. 
+>
+> Then map and use the same value in testing time pre-processing. 
+>
+> We can even create a dictionary for each category and map the value and then use the dictionary at testing time.
+
+![image-20230703221933020](/images/2023-04-19-Data Preprocessing/image-20230703221933020.png)
+
+![image-20230703221949599](/images/2023-04-19-Data Preprocessing/image-20230703221949599.png)
 
 # One Hot encoding
 
-By far the most common way to represent categorical variables is using the `one-hot encoding` or one-out-of-N encoding, also known as `dummy variables`.
+By far, the most common way to represent categorical variables is using the `one-hot encoding` or one-out-of-N encoding, also known as `dummy variables`.
+
+- We map each category to a vector that contains 1 and 0, denoting the presence or absence of the feature.
+- The number of vectors depends on the number of categories for features.
+- Cons: This method produces many columns that **slow down the learning significantly** if the number of the category is very high for the feature.
 
 
 
@@ -137,13 +161,20 @@ Microwave    1
 TV           1
 dtype: int64
 </pre>
+> We can represent all categories by N-1 (N= No of Category) as sufficient to encode the one that is not included.
+>
+> - Usually, for Regression, we use N-1 (drop the first or last column of One Hot Coded new feature ). 
+>   - The linear Regression has access to all of the features as it is being trained and therefore examines the whole set of dummy variables altogether.
+>   - This means that N-1 binary variables give complete information about (represent completely) the original categorical variable to the linear Regression. 
+> - Still, for classification, the recommendation is to use all N columns, as most of the tree-based algorithm builds a tree based on all available variables.
+
 ## The get_dummies function
 
 `The get_dummies function` automatically transforms all columns that have object type (like strings) or are categorical.
 
+- Pandas has **get_dummies** function, which is quite easy to use. 
 - Using get_dummies will only encode the string feature and will not change the integer feature.
-
-- If you want dummy variables to be created for the “Integer Feature” column, you can explicitly list the columns you want to encode using the columns parameter. Then,both features will be treated as categorical.
+- If you want dummy variables to be created for the “Integer Feature” column, you can explicitly list the columns you want to encode using the columns parameter. Then, both features will be treated as categorical.
 
     - pd.get_dummies(demo_df, columns=['Integer Feature', 'Categorical Feature']).
 
@@ -163,7 +194,7 @@ pd.get_dummies(items)
     .dataframe tbody tr th {
         vertical-align: top;
     }
-
+    
     .dataframe thead th {
         text-align: right;
     }
@@ -256,6 +287,82 @@ pd.get_dummies(items)
   </tbody>
 </table>
 </div>
+
+# Label Encoding
+
+- In this encoding, each category is assigned **a value from 1 through N** (where N is the number of categories for the feature. 
+- One major issue with this approach is there is no relation or order between these classes, but the algorithm might **consider them as some order or some relationship.**
+- In below example it may look like (Cold<Hot<Very Hot<Warm….0 < 1 < 2 < 3 ).
+
+![image-20230703214037515](/images/2023-04-19-Data Preprocessing/image-20230703214037515.png)
+
+- Pandas **factorize** also perform the same function.
+
+![image-20230703214102936](/images/2023-04-19-Data Preprocessing/image-20230703214102936.png)
+
+# Ordinal Encoding
+
+- This is reasonable only for ordinal variables.
+- We do Ordinal encoding to ensure the encoding of variables retains the ordinal nature of the variable.
+- slightly different as **Label coding**
+  - as per the order of data (Pandas assigned Hot (0), Cold (1), “Very Hot” (2), and Warm (3)) or
+  - as per alphabetically sorted order (scikit-learn assigned Cold(0), Hot(1), “Very Hot” (2), and Warm (3)).
+- If we consider the temperature scale as the order, then the ordinal value should from cold to “Very Hot. “ Ordinal encoding will assign values as ( Cold(1) <Warm(2)<Hot(3)<”Very Hot(4)). Usually, Ordinal Encoding is done starting from 1.
+
+![image-20230703215127525](/images/2023-04-19-Data Preprocessing/image-20230703215127525.png)
+
+# Helmert Encoding
+
+- In this encoding, the mean of the dependent variable for a level is compared to the mean of the dependent variable over all previous levels.
+
+![image-20230703215519786](/images/2023-04-19-Data Preprocessing/image-20230703215519786.png)
+
+# Binary Encoding
+
+- Binary encoding converts a category into binary digits.
+- Each binary digit creates one feature column.
+- If there are **n** unique categories, then binary encoding results in only $log_2(n)$ features. 
+  - For 100 categories, One Hot Encoding will have 100 features, while Binary encoding will need just seven features.
+
+![image-20230703215859547](/images/2023-04-19-Data Preprocessing/image-20230703215859547.png)
+
+![image-20230703215910010](/images/2023-04-19-Data Preprocessing/image-20230703215910010.png)
+
+# Frequency Encoding
+
+- It is a way to utilize the frequency of the categories as labels.
+- In the cases where the frequency is related somewhat to the target variable, it helps the model understand and assign the weight in direct and inverse proportion, depending on the nature of the data.
+
+![image-20230703220030806](/images/2023-04-19-Data Preprocessing/image-20230703220030806.png)
+
+# Mean Encoding
+
+- Mean Encoding or Target Encoding is one viral encoding approach followed by Kagglers. 
+- There are many variations of this.
+- Mean encoding is similar to label encoding, except here, labels are correlated directly with the target.
+- This encoding method brings out the relation between similar categories, but the connections are **bounded within the categories and the target itself**.
+- Pros: it **does not affect the volume of the data** and helps in faster learning.
+- Usually, Mean encoding is **notorious for over-fitting**; thus, a regularization with cross-validation or some other approach is a must on most occasions.
+
+1. Select a categorical variable you would like to transform.
+2. Group by the categorical variable and obtain aggregated sum over the “Target” variable. (total number of 1’s for each category in ‘Temperature’)
+3. Group by the categorical variable and obtain aggregated count over “Target” variable
+4. Divide the step 2 / step 3 results and join it back with the train.
+
+![image-20230703220830470](/images/2023-04-19-Data Preprocessing/image-20230703220830470.png)
+
+![image-20230703220922801](/images/2023-04-19-Data Preprocessing/image-20230703220922801.png)
+
+- Mean encoding can embody the target in the label, whereas label encoding does not correlate with the target.
+- In the case of many features, mean encoding could prove to be a much simpler alternative. 
+- Mean encoding tends to group the classes, whereas the grouping is random in label encoding.
+
+There are many variations of this target encoding in practice, like smoothing. Smoothing can implement as below:
+
+![image-20230703221019957](/images/2023-04-19-Data Preprocessing/image-20230703221019957.png)
+
+
+
 
 
 # Binning
@@ -387,6 +494,9 @@ Text(0.5, 0, 'Input feature')
 
 for predicting on this data. 2. decision trees look at multiple features at once, while binning is usually done on a per-feature basis.
 
+# Summary of Categorical Encoding
+
+![image-20230703214415862](/images/2023-04-19-Data Preprocessing/image-20230703214415862.png)
 
 # Feature scaling
 
@@ -555,3 +665,9 @@ print("Scaled test set accuracy: {:.2f}".format(svm.score(X_test_scaled, y_test)
 <pre>
 Scaled test set accuracy: 0.97
 </pre>
+
+
+# References
+
+1. [Encoding](https://medium.com/towards-data-science/all-about-categorical-variable-encoding-305f3361fd02)
+
