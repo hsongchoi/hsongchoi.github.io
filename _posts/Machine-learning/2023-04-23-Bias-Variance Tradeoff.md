@@ -30,16 +30,16 @@ use_math: true
       font-weight: bold;
       padding: 8px;
     }
-
+    
     table.dataframe td {
       text-align: center;
       padding: 8px;
     }
-
+    
     table.dataframe tr:hover {
       background: #b8d1f3; 
     }
-
+    
     .output_prompt {
       overflow: auto;
       font-size: 0.9rem;
@@ -81,56 +81,58 @@ use_math: true
   </style>
 </head>
 
+Whenever we build a prediction model, even after all the adjustments and treatments, our predictions will generally be imperfect: there will be some nonzero difference between the predicted and the actual values. This difference is called *prediction error*. We can decompose prediction error into two components: *Reducible and Irreducible error.*
+![image-20230704105618953](/../images/2023-04-23-Bias-Variance Tradeoff/image-20230704105618953.png)
 
-`Bias`:the difference between the average prediction of our model and the correct value which we are trying to predict.
+`Bias`: The difference between the average prediction of our model and the correct value which we are trying to predict.
 
 - `High bias`: little attention to the training data and oversimplifies the model.
 
-- It leads to high error on training and test data.
+- A model has low number of predictors.
+
+- It leads to high errors in training and test data.
 
 
 
-`Variance`: the variability of model prediction for a given data point or a value which tells us spread of our data.
+`Variance`: The variability of model prediction for a given data point or a value that tells us the spread of our data.
 
 - `High variance`: pays a lot of attention to training data and does not generalize on the data which it hasn’t seen before.
 
-- It performs very well on training data but has high error rates on test data.
+- The model is highly sensitive to small fluctuations and has a very large number of predictors. -> A very Complex model.
+
+- 4It performs very well on training data but has high error rates on test data.
 
 
 ## Math
 
-Let the variable we are trying to predict as Y and other covariates as X. We assume there is a relationship between the two such that Y=f(X) + e. Then the expected squared error at a point x is <img src = "https://miro.medium.com/v2/resize:fit:580/format:webp/1*BtpFTBrGaQNE3TvU-0EVSQ.png">
+Let the variable we are trying to predict as Y and other covariates as X. We assume there is a relationship between the two such that $Y=f(X) + e$. Then the expected squared error at a point x is <img src = "https://miro.medium.com/v2/resize:fit:580/format:webp/1*BtpFTBrGaQNE3TvU-0EVSQ.png">
 
 Then,
 
-
-
 <img src = "https://miro.medium.com/v2/resize:fit:1158/format:webp/1*e7VaoBh5apjaM2p4afkFyg.png">
 
-Irreducible error is the error that can’t be reduced by creating good models. It is a measure of the amount of noise in our data. 
+Irreducible error is an error that can’t be reduced by creating good models. It is a measure of the amount of noise in our data. 
+
+![image-20230704104420128](/images/2023-04-23-Bias-Variance Tradeoff/image-20230704104420128.png)
 
 
 ## Overfitting and underfitting
 
-
-
 `Underfitting` happens when a model unable to capture the underlying pattern of the data.
 
-- `high bias and low variance`
+- **`High bias and low variance`**
 
-- when we have very less amount of data to build an accurate model or when we try to build a linear model with a nonlinear data.
+- When we have very little data to build an accurate model or try to build a linear model with nonlinear data.
 
 - Models are very `simple` to capture the complex patterns
 
-
-
 `Overfitting` happens when our model captures the noise along with the underlying pattern in data.
 
-- `low bias and high variance`
+- **`Low bias and high variance`**
 
-- It happens when we train our model a lot over noisy dataset.
+- It happens when we train our model a lot over noisy datasets.
 
-- These models are very complex like Decision trees which are prone to overfitting.
+- These models are very complex, like Decision trees which are prone to overfitting.
 
 <img src = "https://miro.medium.com/v2/resize:fit:936/format:webp/1*xwtSpR_zg7j7zusa4IDHNQ.png">
 
@@ -165,8 +167,6 @@ y = true_fun(X) + np.random.randn(n)*0.1
 ```
 
 We model the regression with degree 1, 4, and 15.
-
-
 
 ```python
 plt.figure(figsize=(14,5))
@@ -232,10 +232,9 @@ The best degree is 4 where its MSE is the smallest value, 0.0432.
 
 To build a good model, we need to find a good balance between bias and variance such that it minimizes the total error.
 
-
-
 `Total error = Bias^2 + Variance + Irreducible error`
 
 <img src = "https://miro.medium.com/v2/resize:fit:1124/format:webp/1*RQ6ICt_FBSx6mkAsGVwx8g.png">
 
-[Reference1](https://towardsdatascience.com/understanding-the-bias-variance-tradeoff-165e6942b229)
+- [Reference1](https://towardsdatascience.com/understanding-the-bias-variance-tradeoff-165e6942b229)
+- [Reference2](https://en.wikipedia.org/wiki/Bias%E2%80%93variance_tradeoff)
