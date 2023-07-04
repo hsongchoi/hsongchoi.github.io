@@ -501,6 +501,16 @@ for predicting on this data. 2. decision trees look at multiple features at once
   - **Normalization** is used when we want to bound our values between two numbers, typically, between [0,1] or [-1,1].
   - While **Standardization** transforms the data to have zero mean and a variance of 1, they make our data **unitless**.
 
+`Normalizer` does a very different kind of rescaling. It scales each data point such that the feature vector has a Euclidean length of 1. In other words, it projects a data point on the circle (or sphere, in the case of higher dimensions) with a radius of 1.
+
+- SVM, Linear Regression, Logistic Regression assume that data follow the Gaussian distribution.
+
+- It is important to apply exactly `the same transformation to the training set and the test set` for the supervised model to work on the test set.
+
+  - We call fit on the `training set`, and then call transform on the `training and test sets`.
+
+![image-20230704101327253](/images/2023-04-19-Data Preprocessing/image-20230704101327253.png)
+
 ## Why need scaling?
 
 The ML algorithm is sensitive to the “**relative scales of features**.
@@ -538,7 +548,7 @@ Algorithms that do not require normalization/scaling are the ones that **rely on
 
 Algorithms like **Linear Discriminant Analysis(LDA), Naive Bayes is** by design equipped to handle this and give weights to the features accordingly. Performing features scaling in these algorithms may not have much effect.
 
-### MinMaxScaler
+### MinMaxScaler (Normalization)
 
 - All of the features are between 0 and 1. 
 - This Scaler shrinks the data within the range of -1 to 1 if there are negative values. 
@@ -623,6 +633,23 @@ print("Scaled test set accuracy: {:.2f}".format(svm.score(X_test_scaled, y_test)
 <pre>
 Scaled test set accuracy: 0.97
 </pre>
+
+### Unit Vector Scaler (Normalization)
+
+![image-20230704003120987](/images/2023-04-19-Data Preprocessing/image-20230704003120987.png)
+
+- Scaling is done considering the whole feature vector to be of unit length.
+- Scaling to unit length shrinks/stretches a vector (a row of data can be viewed as a *D*-dimensional vector) to a unit sphere. When used on the entire dataset, the transformed data can be visualized as a bunch of vectors with different directions on the *D*-dimensional unit sphere.
+
+ This usually means dividing each component by the Euclidean length of the vector (L2 Norm). In some applications (e.g., histogram features), it can be more practical to use the L1 norm of the feature vector.
+
+Like Min-Max Scaling, the Unit Vector technique produces values of range [0,1]. When dealing with features with hard boundaries, this is quite useful. For example, when dealing with image data, the colors can range from only 0 to 255.
+
+![image-20230704003201861](/images/2023-04-19-Data Preprocessing/image-20230704003201861.png)
+
+If we plot, then it would look as below for L1 and L2 norm, respectively.
+
+![image-20230704003232863](/images/2023-04-19-Data Preprocessing/image-20230704003232863.png)
 
 ### StandardScaler
 
@@ -710,11 +737,12 @@ Let’s now see what happens if we introduce an outlier and see the effect of sc
 
 ### Quantile Transformer Scaler (**Rank scaler**)
 
-Transform features using quantiles information.
-
-This method transforms the features to follow a **uniform or a normal** distribution. Therefore, for a given feature, this transformation tends to spread out the most frequent values. It also reduces the impact of (marginal) outliers: this is, therefore, a **robust pre-processing** scheme.
-
-The cumulative distribution function of a feature is used to project the original values. Note that this transform is non-linear and may distort linear correlations between variables measured at the same scale but renders variables measured at different scales more directly comparable. This is also sometimes called as **Rank scaler.**
+- Transform features using quantiles information.
+- This method transforms the features to follow a **uniform or a normal** distribution. 
+- Therefore, for a given feature, this transformation tends to spread out the most frequent values.
+- It also reduces the impact of (marginal) outliers: this is, therefore, a **robust pre-processing** scheme.
+- The cumulative distribution function of a feature is used to project the original values.
+- Note that this transform is non-linear and may distort linear correlations between variables measured at the same scale but renders variables measured at different scales more directly comparable.
 
 ```python
 from sklearn.preprocessing import QuantileTransformer
@@ -732,11 +760,16 @@ plt.axvline(0, color='red',alpha=0.2);
 
 The above example is just for illustration as Quantile transformer is useful when we have a large dataset with many data points usually more than 1000.
 
+![image-20230704100617082](/images/2023-04-19-Data Preprocessing/image-20230704100617082.png)
+
 ### Power Transformer Scaler
 
-The power transformer is a family of parametric, monotonic transformations that are applied to **make data more Gaussian-like**. This is useful for modeling issues related to the variability of a variable that is unequal across the range (heteroscedasticity) or situations where normality is desired.
-
-The power transform finds the optimal scaling factor in stabilizing variance and minimizing skewness through maximum likelihood estimation. Currently, Sklearn implementation of PowerTransformer supports the Box-Cox transform and the Yeo-Johnson transform. The optimal parameter for stabilizing variance and minimizing skewness is estimated through maximum likelihood. Box-Cox requires input data to be strictly positive, while Yeo-Johnson supports both positive or negative data.
+- The power transformer is a family of parametric, monotonic transformations that are applied to **make data more Gaussian-like**. 
+- This is useful for modeling issues related to the variability of a variable that is unequal across the range (heteroscedasticity) or situations where normality is desired.
+- The power transform finds the optimal scaling factor in stabilizing variance and minimizing skewness through maximum likelihood estimation. 
+- Currently, Sklearn implementation of PowerTransformer supports the Box-Cox transform and the Yeo-Johnson transform. 
+- The optimal parameter for stabilizing variance and minimizing skewness is estimated through maximum likelihood. 
+- Box-Cox requires input data to be strictly positive, while Yeo-Johnson supports both positive or negative data.
 
 ```python
 from sklearn.preprocessing import PowerTransformer
@@ -754,31 +787,12 @@ plt.axvline(0, color='red',alpha=0.2);
 
 ![image-20230704003051614](/images/2023-04-19-Data Preprocessing/image-20230704003051614.png)
 
-### Unit Vector Scaler
 
-![image-20230704003120987](/images/2023-04-19-Data Preprocessing/image-20230704003120987.png)
-
-Scaling is done considering the whole feature vector to be of unit length. This usually means dividing each component by the Euclidean length of the vector (L2 Norm). In some applications (e.g., histogram features), it can be more practical to use the L1 norm of the feature vector.
-
-Like Min-Max Scaling, the Unit Vector technique produces values of range [0,1]. When dealing with features with hard boundaries, this is quite useful. For example, when dealing with image data, the colors can range from only 0 to 255.
-
-![image-20230704003201861](/images/2023-04-19-Data Preprocessing/image-20230704003201861.png)
-
-If we plot, then it would look as below for L1 and L2 norm, respectively.
-
-![image-20230704003232863](/images/2023-04-19-Data Preprocessing/image-20230704003232863.png)
-
-`Normalizer` does a very different kind of rescaling. It scales each data point such that the feature vector has a Euclidean length of 1. In other words, it projects a data point on the circle (or sphere, in the case of higher dimensions) with a radius of 1.
-
-- SVM, Linear Regression, Logistic Regression assume that data follow the Gaussian distribution.
-
-- It is important to apply exactly `the same transformation to the training set and the test set` for the supervised model to work on the test set.
-
-    - We call fit on the `training set`, and then call transform on the `training and test sets`.
 
 
 
 # References
 
 1. [Encoding](https://medium.com/towards-data-science/all-about-categorical-variable-encoding-305f3361fd02)
+2. [Scaling](https://towardsdatascience.com/all-about-feature-scaling-bcc0ad75cb35)
 
