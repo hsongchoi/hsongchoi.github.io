@@ -185,17 +185,17 @@ f(x) = B(0) + sum(ai * (x,xi))
 
 ### Regularization
 
-The **Regularization Parameter** (**in python, it’s called** **C**) tells the SVM optimization **how much you want to avoid miss classifying** each training example.
+The **Regularization Parameter** (**in Python, it’s called** **C**) tells the SVM optimization **how much you want to avoid miss classifying** each training example.
 
 - If the **C is** **higher**, the optimization will choose **a smaller margin** hyperplane, so the training data **miss classification rate will be lower**.
-  - When the C is high, the boundary is full of curves and all the training data was classified correctly.
+  - When the C is high, the boundary is full of curves, and all the training data was classified correctly.
 - On the other hand, if the **C is** **low**, then the **margin will be big**, even if there **will be miss classified** training data examples. 
-  - As you can see in the image, when the C is low, the margin is higher (so implicitly we don’t have so many curves, the line doesn’t strictly follows the data points) even if two apples were classified as lemons. 
+  - As you can see in the image when the C is low, the margin is higher (so implicitly we don’t have so many curves, the line doesn’t strictly follows the data points) even if two apples were classified as lemons. 
 - This is shown in the following two diagrams:
 
 ![image-20230705115520590](/images/2023-07-04-Supervised-Learning-Classification/image-20230705115520590.png)
 
-- **Don’t forget**, even if all the training data was correctly classified, this doesn’t mean that increasing the C will always increase the precision (because of overfitting).
+- **Don’t forget** even if all the training data was correctly classified, this doesn’t mean that increasing the C will always increase the precision (because of overfitting).
 
 ### Gamma
 
@@ -205,10 +205,74 @@ The gamma parameter defines **how far the influence of a single training example
 
 ![image-20230705115902410](/images/2023-07-04-Supervised-Learning-Classification/image-20230705115902410.png)
 
-- As you can see, decreasing the Gamma will result that finding the correct hyperplane will consider points at greater distances so more and more points will be used (green lines indicates which points were considered when finding the optimal hyperplane).
+- As you can see, decreasing the Gamma will result in finding the correct hyperplane will consider points at greater distances, so more and more points will be used (green lines indicate which points were considered when finding the optimal hyperplane).
 
 ### Margin
 
-- **Higher margin results in better model**, so better classification (or prediction). The margin should be always **maximized**.
+- **Higher margin results in a better model**, so better classification (or prediction). The margin should be always **maximized**.
 
 [SVM_Reference](https://towardsdatascience.com/svm-and-kernel-svm-fed02bef1200)
+
+# K-Nearest Neighbors
+
+- **Supervised machine learning algorithm** as target variable is known.
+- **Nonparametric,** as it does not make an assumption about the underlying data distribution pattern
+- **A Lazy algorithm** such as KNN does not have a training step. All data points will be used only at the time of prediction. With no training step, the prediction step is costly. An eager learner algorithm eagerly learns during the training step.
+- Used for both **Classification and Regression**
+- Uses **feature similarity** to predict the cluster that the new point will fall into.
+
+## What is K in KNN?
+
+K is a number used to identify similar neighbors for the new data point.
+
+- KNN takes K's nearest neighbors to decide where the new data point belongs. 
+- This decision is based on feature similarity.
+
+## How do we choose the value of K?
+
+The choice of K has a drastic impact on the results we obtain from KNN.
+
+we can take the test set and plot the accuracy rate or F1 score against different values of K.
+
+We see a high error rate for the test set when K=1. Hence we can conclude that model overfits when k=1.
+
+For a high value of K, we see that the F1 score starts to drop. The test set reaches a minimum error rate when k=5. This is very similar to the elbow method used in [K-means](https://medium.com/datadriveninvestor/k-means-clustering-6f2dc458cce8).
+
+The value of K at the elbow of the test error rate gives us the optimal value of K.
+
+![image-20230705123646581](/images/2023-07-04-Supervised-Learning-Classification/image-20230705123646581.png)
+
+We can evaluate the accuracy of the KNN classifier using [K-fold cross-validation.](https://medium.com/datadriveninvestor/k-fold-and-other-cross-validation-techniques-6c03a2563f1e)
+
+## How does KNN work?
+
+We have age and experience in an organization along with the salaries. We want to predict the salary of a new candidate whose age and experience are available.
+
+- Step 1: **Choose a value for K**. K should be an odd number.
+- Step 2: **Find the distance of the new point to each of the training data**.
+- Step 3:**Find the K nearest neighbors to the new data point**.
+- Step 4: For classification, count the number of data points in each category among the k neighbors. **The New data point will belong to the class that has the most neighbors**.
+
+For regression, value for the **new data point will be the average of the k neighbors**.
+
+## How is the distance calculated?
+
+The distance can be calculated using many types of distances.
+
+- ![image-20230705123436565](/images/2023-07-04-Supervised-Learning-Classification/image-20230705123436565.png)
+
+## Pros
+
+- Simple algorithm and hence easy to interpret the prediction
+- Nonparametric, so it makes no assumption about the underlying data pattern
+- used for both classification and Regression
+- The training step is much faster for the nearest neighbor compared to other machine-learning algorithms
+
+## Cons
+
+- KNN is computationally expensive as it searches the nearest neighbors for the new point at the prediction stage
+- High memory requirement as KNN has to store all the data points
+- The prediction stage is very costly
+- Sensitive to outliers, accuracy is impacted by noise or irrelevant data.
+
+[KNN Reference](https://medium.com/datadriveninvestor/k-nearest-neighbors-knn-7b4bd0128da7)
