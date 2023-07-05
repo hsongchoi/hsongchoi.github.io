@@ -14,7 +14,44 @@ Classification is one of the most important aspects of **supervised learning**.
 
 # Logistic Regression
 
+Logistic Regression is a Machine Learning algorithm that is used for classification problems.
 
+![image-20230705120947026](/images/2023-07-04-Supervised-Learning-Classification/image-20230705120947026.png)
+
+- The hypothesis of logistic regression tends to limit the cost function between 0 and 1.
+- ![image-20230705121346582](/images/2023-07-04-Supervised-Learning-Classification/image-20230705121346582.png)
+- ![image-20230705121415989](/images/2023-07-04-Supervised-Learning-Classification/image-20230705121415989.png)
+- ![image-20230705121426545](/images/2023-07-04-Supervised-Learning-Classification/image-20230705121426545.png)
+
+## Decision Boundary
+
+- We have 2 classes, let’s take them like cats and dogs(1 — dog, 0 — cats). We basically decide with **a threshold value above** which we classify values into **Class 1**, and if the value goes **below the threshold**, then we classify it in **Class 2**.
+- ![image-20230705121542825](/images/2023-07-04-Supervised-Learning-Classification/image-20230705121542825.png)
+- As shown in the above graph we have chosen the threshold as 0.5, if the prediction function returned a value of 0.7 then we would classify this observation as Class 1(DOG). If our prediction returned a value of 0.2 then we would classify the observation as Class 2(CAT).
+
+## Cost Function
+
+- We learned about the cost function *J*(*θ*) in Linear regression*](https://towardsdatascience.com/introduction-to-linear-regression-and-polynomial-regression-f8adc96f31cb), the cost function represents the optimization objective, i.e. we create a cost function and minimize it so that we can develop an accurate model with minimum error.
+  - ![image-20230705121815888](/images/2023-07-04-Supervised-Learning-Classification/image-20230705121815888.png)
+  - If we try to use the cost function of the linear regression in ‘Logistic Regression’ then it would be of no use as it would end up being a **non-convex** function with many local minimums, in which it would be very **difficult** to **minimize the cost value** and find the global minimum.
+
+![image-20230705121749504](/images/2023-07-04-Supervised-Learning-Classification/image-20230705121749504.png)
+
+The above two functions can be compressed into a single function i.e.
+
+![image-20230705121858961](/images/2023-07-04-Supervised-Learning-Classification/image-20230705121858961.png)
+
+## Gradient Descent
+
+Now the question arises, how do we reduce the cost value? Well, this can be done by using **Gradient Descent.** The main goal of Gradient descent is to **minimize the cost value.** i.e. min J(***θ\***).
+
+- Now to minimize our cost function, we need to run the gradient descent function on each parameter i.e.
+
+![image-20230705122049696](/images/2023-07-04-Supervised-Learning-Classification/image-20230705122049696.png)
+
+Gradient descent has an analogy in which we have to imagine ourselves at the top of a mountain valley and left stranded and blindfolded, our objective is to reach the bottom of the hill. Feeling the slope of the terrain around you is what everyone would do. Well, this action is analogous to calculating the gradient descent, and taking a step is analogous to one iteration of the update to the parameters.
+
+![image-20230705122131145](/images/2023-07-04-Supervised-Learning-Classification/image-20230705122131145.png)
 
 # Fisher’s Linear Discriminant
 
@@ -171,3 +208,5 @@ The gamma parameter defines **how far the influence of a single training example
 ### Margin
 
 - **Higher margin results in better model**, so better classification (or prediction). The margin should be always **maximized**.
+
+[SVM_Reference](https://towardsdatascience.com/svm-and-kernel-svm-fed02bef1200)
