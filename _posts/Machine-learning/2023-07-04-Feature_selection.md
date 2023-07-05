@@ -71,6 +71,7 @@ plt.show()
   -  SVD gives you the whole nine-yard of diagonalizing a matrix into [special matrices](https://medium.com/@jonathan_hui/machine-learning-linear-algebra-special-matrices-c750cd742dfe) that are easy to manipulate and to analyze.
   - Obviously, we can use SVD to find PCA by truncating the less important basis vectors in the original SVD matrix.
 
-A matrix can be diagonalized if *A* is a $n \times n$square matrix and *A* has n linearly independent eigenvectors. 
+A matrix can be diagonalized if *A* is a $n \times n$ square matrix and *A* has n linearly independent eigenvectors. 
 
 ![image-20230704182540847](/images/2023-07-04-Feature_selection/image-20230704182540847.png)
+
