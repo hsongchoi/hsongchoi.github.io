@@ -53,6 +53,8 @@ Gradient descent has an analogy in which we have to imagine ourselves at the top
 
 ![image-20230705122131145](/images/2023-07-04-Supervised-Learning-Classification/image-20230705122131145.png)
 
+[Logistic Regression_Reference](https://medium.com/towards-data-science/introduction-to-logistic-regression-66248243c148)
+
 # Fisher’s Linear Discriminant
 
 ## Background
