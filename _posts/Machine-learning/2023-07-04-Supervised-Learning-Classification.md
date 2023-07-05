@@ -97,7 +97,77 @@ Here ***μ\*** (the mean) is a D-dimensional vector. **Σ** (sigma) is a **DxD**
 - **LDA inherits the problems of GLM.** **It assumes the Gaussian distribution of the input variables.** Always consider reviewing the univariate distributions of each attribute and using transforms to make them more Gaussian-looking.
 - Like GLM, **outliers will affect the mean.** Also, skew and kurtosis need to be checked for as they affect standard deviation.
 - Features assume that **each input variable has the same variance.**
-- It will help to standardize the features and also limit the standard deviation between 0 to 1.
+- It will help standardize the features and limit the standard deviation between 0 and 1.
 
 # SVM
 
+- Find the ideal **hyperplane** that differentiates between the two classes.
+- These support vectors are the **coordinate representations** of **individual observation**. It is a **frontier method** for **segregating** the **two classes**.
+- Based on these support vectors, the algorithm tries to find **the best hyperplane that separates the classes**. 
+
+![image-20230705101851447](/images/2023-07-04-Supervised-Learning-Classification/image-20230705101851447.png)
+
+Intuitively the **best line** is the line that is **far away from both apple and lemon examples** (has the largest margin). To have an optimal solution, we have to **maximize the margin in both ways** (if we have multiple classes, then we have to maximize it considering each of the classes).
+
+1. select **two hyperplanes** (in 2D) that separates the data **with no points between them** (red lines)
+2. **maximize their distance** (the margin)
+3. the **average line** (here the line halfway between the two red lines) will be the **decision boundary**
+
+## SVM for Non-Linear Data Sets
+
+![image-20230705114941606](/images/2023-07-04-Supervised-Learning-Classification/image-20230705114941606.png)
+
+- The basic idea is that when a data set is inseparable from the current dimensions, **add another dimension**, maybe that way, the data will be separable. 
+
+  - Just think about it, the example above is in 2D, and it is inseparable, but maybe in 3D, there is a gap between the apples and the lemons. In this case, we can easily draw a separating hyperplane (in 3D a hyperplane is a plane) between levels 1 and 2.
+  - We just used a transformation in which **we added levels based on distance**.
+  - These transformations are called **kernels**. Popular kernels are **Polynomial Kernel, Gaussian Kernel, Radial Basis Function (RBF), Laplace RBF Kernel, Sigmoid Kernel, Anove RBF Kernel**, etc (see [Kernel Functions](https://data-flair.training/blogs/svm-kernel-functions/) or a more detailed description [Machine Learning Kernels](https://mlkernels.readthedocs.io/en/latest/kernels.html)).
+
+  ![image-20230705115119670](/images/2023-07-04-Supervised-Learning-Classification/image-20230705115119670.png)
+
+  ![image-20230705115231547](/images/2023-07-04-Supervised-Learning-Classification/image-20230705115231547.png)
+
+  After using the kernel and after all the transformations, we will get:
+
+  ![image-20230705115253162](/../images/2023-07-04-Supervised-Learning-Classification/image-20230705115253162.png)
+
+## Tuning parameters
+
+### Kernel
+
+For **linear kernel**, the equation for prediction for a new input using the dot product between the input (x) and each support vector (xi) is calculated as follows:
+
+f(x) = B(0) + sum(ai * (x,xi))
+
+- As a rule of thumb, **always check if you have linear data,** and in that case, always **use linear SVM** (linear kernel). 
+- **Linear SVM is a parametric model**, but an **RBF kernel SVM isn’t**, so the complexity of the latter grows with the size of the training set. 
+- Not only is **more expensive to train an RBF kernel SVM**, but you also have to **keep the kernel matrix around**, and the **projection** **into** this “infinite” **higher dimensional space** where the data becomes linearly separable is **more expensive** as well during prediction. 
+- Furthermore, you have **more hyperparameters to tune**, so model selection is more expensive as well! And finally, it’s much **easier to overfit** a complex model!
+
+### Regularization
+
+The **Regularization Parameter** (**in python, it’s called** **C**) tells the SVM optimization **how much you want to avoid miss classifying** each training example.
+
+- If the **C is** **higher**, the optimization will choose **a smaller margin** hyperplane, so the training data **miss classification rate will be lower**.
+  - When the C is high, the boundary is full of curves and all the training data was classified correctly.
+- On the other hand, if the **C is** **low**, then the **margin will be big**, even if there **will be miss classified** training data examples. 
+  - As you can see in the image, when the C is low, the margin is higher (so implicitly we don’t have so many curves, the line doesn’t strictly follows the data points) even if two apples were classified as lemons. 
+- This is shown in the following two diagrams:
+
+![image-20230705115520590](/images/2023-07-04-Supervised-Learning-Classification/image-20230705115520590.png)
+
+- **Don’t forget**, even if all the training data was correctly classified, this doesn’t mean that increasing the C will always increase the precision (because of overfitting).
+
+### Gamma
+
+The gamma parameter defines **how far the influence of a single training example reaches**.
+
+- This means that **high Gamma** will consider **only points** **close** to the plausible hyperplane, and **low** **Gamma** will consider **points at greater distance**s.
+
+![image-20230705115902410](/images/2023-07-04-Supervised-Learning-Classification/image-20230705115902410.png)
+
+- As you can see, decreasing the Gamma will result that finding the correct hyperplane will consider points at greater distances so more and more points will be used (green lines indicates which points were considered when finding the optimal hyperplane).
+
+### Margin
+
+- **Higher margin results in better model**, so better classification (or prediction). The margin should be always **maximized**.
