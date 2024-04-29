@@ -208,7 +208,7 @@ ORDER BY state_code, last_name DESC;
 ```sql
 SELECT *
 FROM people
-WHERE state code like 'C%'
+WHERE state_code like 'C%'
 LIMIT 5 OFFSET 5; #The results will be limited to 10 records, skipping the first five records.
 ```
 
