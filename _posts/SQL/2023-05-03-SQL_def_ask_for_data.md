@@ -159,7 +159,7 @@ WHERE state_code='CA' AND shirt_or_hat='shirt';
 
 ### **Like** ‘%’
 
-- Returns results that match part of a string.
+- Column value is similar to a specified character(s).
 - The % character represents the portion of the string to ignore.
 
 ```sql
@@ -170,6 +170,54 @@ WHERE state_code like 'C%';
 
 - This tells the database to match the letter C, and then whatever comes after it, we don't care about, regardless of how much information follows the letter C. e="CA", OR state_code="CO", OR state_code="CT", and so on. Or we could say state_code LIKE 'C%' 
 - This is `not case-sensitive`. I am using capital letters in my condition, but it’s matching lowercase ones.
+- There is another wildcard character you can use with LIKE operator. It is the underscore character, ' _ ' . In a search string, the underscore signifies a single character.
+
+```sql
+SELECT first_name, last_name
+FROM student_details
+WHERE first_name LIKE '_a%';
+-- You can use more than one underscore. 
+```
+
+### **Between... And**
+
+- Range: to find the names of the students between age 10 to 15 years, the query would be like,
+
+```sql
+SELECT first_name, last_name, age
+FROM student_details
+WHERE age BETWEEN 10 AND 15;
+```
+
+
+
+### **IN**
+
+- The IN operator is used when you want to compare a column with more than one value. It is similar to an OR condition.
+- If you want to find the names of students who are studying either Maths or Science, the query would be like,
+
+```sql
+SELECT first_name, last_name, subject
+FROM student_details
+WHERE subject IN ('Maths', 'Science');
+```
+
+- The data used to compare is case-sensitive.
+
+![image-20240430152531644](/images/2023-05-03-SQL_def_ask_for_data/image-20240430152531644.png)
+
+### **IS NULL**
+
+- A column value is NULL if it does not exist. The IS NULL operator is used to display all the rows for columns that do not have a value.
+- If you want to find the names of students who do not participate in any games, the query would be as given below.
+
+```sql
+SELECT first_name, last_name
+FROM student_details
+WHERE games IS NULL
+```
+
+
 
 ## 3. GROUP BY
 
