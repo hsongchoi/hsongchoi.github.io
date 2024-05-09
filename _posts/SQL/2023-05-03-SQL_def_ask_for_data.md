@@ -95,7 +95,7 @@ SELECT MAX(quiz_points), MIN(quiz_points)
 FROM people;
 ```
 
-### Transforming data
+### String Functions
 
 #### 1) LOWER(), UPPER()
 
@@ -115,7 +115,7 @@ SELECT first_name, SUBSTR(last_name, 1, 5)
 FROM people;
 ```
 
-#### 3) REPLACE( , , )
+#### 3) REPLACE
 
 ```sql
 SELECT REPLACE (first_name, "a", "-")
@@ -125,15 +125,74 @@ FROM people;
 <img src="/images/2023-05-03-SQL_def_ask_for_data/image-20230503155843960.png" alt="image-20230503155843960" style="zoom:50%;" />
 
 - This replacement is case-sensitive, so keep an eye out for that.
+- REPLACE(*string*, *old_string*, *new_string*)
 - In fact, if I scroll down here to row 53, Anne still has a capital A because capital A is a different character than lowercase a. 
 
-### Creating aliases with AS
+#### 4) CONCAT / +
+
+- The CONCAT() function adds two or more strings together.
+- The + operator allows you to add two or more strings together.
+- The CONCAT_WS() function adds two or more strings together with a separator.
 
 ```sql
-SELECT first_name AS firstname, UPPER(last_name) AS surname
-FROM people
-WHERE firstname = 'Laura';
+SELECT CONCAT('SQL', ' is', ' fun!');
+SELECT CONCAT('SQL', ' ', 'is', ' ', 'fun!');
+SELECT 'SQL' + ' is' + ' fun!';
+
+SELECT CONCAT_WS('-', 'SQL', ' is', ' fun!'); 
+/* SQL- is- fun! */
 ```
+
+#### 5) LEFT / RIGHT
+
+- The LEFT() function extracts a number of characters from a string (starting from left).
+- Extract 5 characters from the text in the "CustomerName" column (starting from left):
+
+```sql
+SELECT LEFT(CustomerName, 5) AS ExtractString
+FROM Customers;
+```
+
+#### 6) LEN()
+
+- Return the length of a string:
+
+```sql
+SELECT LEN(' W3Schools.com ');
+```
+
+#### 7) DISTINCT
+
+Let's take a look at pulling out only the unique values or the values that are distinct from one another with the DISTINCT function. 
+
+```sql
+SELECT DISTINCT(frst_name)
+FROM people
+ORDER by frst_name;
+```
+
+#### 8) REPLICATE
+
+The REPLICATE() function repeats a string a specified number of times.
+
+```sql
+SELECT REPLICATE(CustomerName, 2)
+FROM Customers;
+/* 
+Alfreds FutterkisteAlfreds Futterkiste
+Around the HornAround the Horn
+```
+
+#### 9) REVERSE
+
+The REVERSE() function reverses a string and returns the result.
+
+```sql
+SELECT REVERSE('SQL Tutorial');
+/* lairotuT LQS
+```
+
+
 
 ## 2. WHERE
 
@@ -157,7 +216,52 @@ FROM people
 WHERE state_code='CA' AND shirt_or_hat='shirt';
 ```
 
-### **Like** ‘%’
+```sql
+SELECT *
+FROM Customers
+WHERE Country = 'Germany' OR Country = 'Spain';
+```
+
+#### WHERE NOT
+
+- The `NOT` operator is used in combination with other operators to give the opposite result, also called the negative result.
+
+  In the select statement below we want to return all customers that are NOT from Spain:
+
+```sql
+SELECT * FROM Customers
+WHERE NOT Country = 'Spain';
+```
+
+- Select customers that does not start with the letter 'A':
+
+```sql
+SELECT * FROM Customers
+WHERE CustomerName NOT LIKE 'A%';
+```
+
+- Select customers with a customerID not between 10 and 60:
+
+```sql
+SELECT * FROM Customers
+WHERE CustomerID NOT BETWEEN 10 AND 60;
+```
+
+- Select customers that are not from Paris or London:
+
+```SQL
+SELECT * FROM Customers
+WHERE City NOT IN ('Paris', 'London');
+```
+
+- Select customers with a CustomerID not less than 50:
+
+```SQL
+SELECT * FROM Customers
+WHERE NOT CustomerId < 50;
+```
+
+#### **Like** ‘%’
 
 - Column value is similar to a specified character(s).
 - The % character represents the portion of the string to ignore.
@@ -179,7 +283,7 @@ WHERE first_name LIKE '_a%';
 -- You can use more than one underscore. 
 ```
 
-### **Between... And**
+#### **Between... And**
 
 - Range: to find the names of the students between age 10 to 15 years, the query would be like,
 
@@ -189,9 +293,7 @@ FROM student_details
 WHERE age BETWEEN 10 AND 15;
 ```
 
-
-
-### **IN**
+#### **IN**
 
 - The IN operator is used when you want to compare a column with more than one value. It is similar to an OR condition.
 - If you want to find the names of students who are studying either Maths or Science, the query would be like,
@@ -206,7 +308,7 @@ WHERE subject IN ('Maths', 'Science');
 
 ![image-20240430152531644](/images/2023-05-03-SQL_def_ask_for_data/image-20240430152531644.png)
 
-### **IS NULL**
+#### **IS NULL**
 
 - A column value is NULL if it does not exist. The IS NULL operator is used to display all the rows for columns that do not have a value.
 - If you want to find the names of students who do not participate in any games, the query would be as given below.
@@ -324,6 +426,39 @@ The CASE statement is used to implement the logic where you want to set the valu
 
 >  It is similar to the IF-ELSE statement in Excel.
 
+```sql
+CASE
+    WHEN condition1 THEN result1
+    WHEN condition2 THEN result2
+    WHEN conditionN THEN resultN
+    ELSE result
+END;
+```
+
+```sql
+SELECT OrderID, Quantity,
+CASE
+    WHEN Quantity > 30 THEN 'The quantity is greater than 30'
+    WHEN Quantity = 30 THEN 'The quantity is 30'
+    ELSE 'The quantity is under 30'
+END AS QuantityText
+FROM OrderDetails;
+```
+
+![image-20240509152203384](/images/2023-05-03-SQL_def_ask_for_data/image-20240509152203384.png)
+
+- The following SQL will order the customers by City. However, if City is NULL, then order by Country:
+
+```sql
+SELECT CustomerName, City, Country
+FROM Customers
+ORDER BY
+(CASE
+    WHEN City IS NULL THEN Country
+    ELSE City
+END);
+```
+
 Write a query to print the first name, salary, and average salary as well as a new column that shows whether employees' salary is higher than average or not.
 
 ```sql
@@ -349,17 +484,7 @@ SELECT first_name, length(first_name)
 FROM people
 ```
 
-## 2. DISTINCT
-
-Let's take a look at pulling out only the unique values or the values that are distinct from one another with the DISTINCT function. 
-
-```sql
-SELECT DISTINCT(frst_name)
-FROM people
-ORDER by frst_name;
-```
-
-## 3. Date Functions
+## 2. Date Functions
 
 In PostgreSQL, you can easily extract values from date columns. You will see the most used date functions below.
 
@@ -375,7 +500,7 @@ hire date
 FROM employees
 ```
 
-## 4. Window Functions
+## 3. Window Functions
 
 Window functions aggregate and ranking functions over a particular window (set of rows). 
 

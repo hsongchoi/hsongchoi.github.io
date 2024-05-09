@@ -92,3 +92,33 @@ WHERE LEFT(CITY, 1) NOT IN ("A", "E", "I", "O", "U")
 -- !AND = OR
 ```
 
+# Q8. Higher Than 75 Marks
+
+![image-20240509141852169](/images/2024-04-30-SQL_hackerrank1/image-20240509141852169.png)
+
+```sql
+SELECT NAME
+FROM STUDENTS
+WHERE MARKS >75
+ORDER BY RIGHT(NAME, 3), ID
+```
+
+# Q9. Type of Triangle
+
+![image-20240509144016704](/images/2024-04-30-SQL_hackerrank1/image-20240509144016704.png)
+
+```sql
+SELECT CASE
+    WHEN (a=b and b=c) THEN 'Equilateral' 
+    WHEN (a+b<=c or b+c<=a or c+a<=b) THEN 'Not A Triangle' 
+    WHEN (a!=b and b!=c and c!=a) THEN 'Scalene' 
+ELSE 'Isosceles' END
+FROM triangles
+```
+
+```sql
+SELECT CONCAT( Name,'(', LEFT(occupation,1),')' ) FROM OCCUPATIONS ORDER BY Name ASC;
+
+SELECT CONCAT("There are a total of ",COUNT(occupation)," ",LOWER(occupation),"s.") FROM OCCUPATIONS GROUP BY occupation ORDER BY COUNT(occupation) ASC, LOWER(occupation) ASC;
+```
+
