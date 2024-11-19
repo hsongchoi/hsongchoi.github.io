@@ -500,6 +500,18 @@ hire date
 FROM employees
 ```
 
+In MySQL, 
+
+- YEAR() returns the year for a given date. The return value ranges from 1000 to 9999 or 0 for the 'zero' date.
+- MONTH() returns the MONTH for the date within a range of 1 to 12.
+- DAY() returns the day of the month for a specified date. The day returned will be within the range of 1 to 31.
+
+```sql
+SELECT pub_name,estd,MONTH(estd) as 'Estd. MONTH'              
+FROM publisher        
+WHERE MONTH(estd)>7;
+```
+
 ## 3. Window Functions
 
 Window functions aggregate and ranking functions over a particular window (set of rows). 
