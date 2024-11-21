@@ -29,7 +29,7 @@ where cool =
      From yelp_reviews);
 ```
 
-## [The Most Popular Client_Id Among Users Using Video and Voice Calls][https://platform.stratascratch.com/coding/2029-the-most-popular-client_id-among-users-using-video-and-voice-calls?python=&code_type=3]
+## [The Most Popular Client_Id Among Users Using Video and Voice Calls](https://platform.stratascratch.com/coding/2029-the-most-popular-client_id-among-users-using-video-and-voice-calls?python=&code_type=3)
 
 ![image-20241119193308392](/images/2024-11-19-SQL_stratascratch/image-20241119193308392.png)
 
@@ -52,7 +52,7 @@ LIMIT 1
 
 # GROUP BY Clause
 
-## [3 Bed Minimum][https://platform.stratascratch.com/coding/9627-3-bed-minimum?python=&code_type=3]
+## [3 Bed Minimum](https://platform.stratascratch.com/coding/9627-3-bed-minimum?python=&code_type=3)
 
 ![image-20241119202919929](/images/2024-11-19-SQL_stratascratch/image-20241119202919929.png)
 
@@ -70,7 +70,7 @@ ORDER BY AVG(beds) DESC;
 
 # Ranking Rows and LIMIT Clause
 
-## [Ranking Most Active Guests][https://platform.stratascratch.com/coding/10159-ranking-most-active-guests?python=&code_type=3]
+## [Ranking Most Active Guests](https://platform.stratascratch.com/coding/10159-ranking-most-active-guests?python=&code_type=3)
 
 ![image-20241119232801316](/images/2024-11-19-SQL_stratascratch/image-20241119232801316.png)
 
@@ -90,7 +90,7 @@ GROUP BY id_guest
 ORDER BY sum_n_messages DESC;
 ```
 
-## [Most checkins][https://platform.stratascratch.com/coding/10053-most-checkins?python=&code_type=3]
+## [Most checkins](https://platform.stratascratch.com/coding/10053-most-checkins?python=&code_type=3)
 
 ![image-20241119233540525](/images/2024-11-19-SQL_stratascratch/image-20241119233540525.png)
 
@@ -112,7 +112,7 @@ LIMIT 5;
 
 # Subqueries and CTEs
 
-## [Top 10 Songs][https://platform.stratascratch.com/coding/9743-top-10-songs?python=&code_type=3]
+## [Top 10 Songs](https://platform.stratascratch.com/coding/9743-top-10-songs?python=&code_type=3)
 
 ![image-20241120104037030](/../images/2024-11-19-SQL_stratascratch/image-20241120104037030.png)
 
@@ -138,7 +138,7 @@ ORDER BY
     top10_songs_count DESC;
 ```
 
-## [Find the top 5 cities with the most 5-star businesses][https://platform.stratascratch.com/coding/10148-find-the-top-10-cities-with-the-most-5-star-businesses?python=&code_type=3]	
+## [Find the top 5 cities with the most 5-star businesses](https://platform.stratascratch.com/coding/10148-find-the-top-10-cities-with-the-most-5-star-businesses?python=&code_type=3)
 
 ![image-20241120113756410](/../images/2024-11-19-SQL_stratascratch/image-20241120113756410.png)
 
@@ -164,7 +164,7 @@ ORDER BY count_of_5_stars DESC;
 
 # JOINs
 
-## [Highest Cost orders][https://platform.stratascratch.com/coding/9915-highest-cost-orders?python=&code_type=3]
+## [Highest Cost orders](https://platform.stratascratch.com/coding/9915-highest-cost-orders?python=&code_type=3)
 
 ![image-20241120120459663](/images/2024-11-19-SQL_stratascratch/image-20241120120459663.png)
 
@@ -196,7 +196,7 @@ HAVING sum(total_order_cost) =
 
 #  Data Organizing and Pattern Matching
 
-## [Classify Business Type][https://platform.stratascratch.com/coding/9726-classify-business-type?python=&code_type=3]
+## [Classify Business Type](https://platform.stratascratch.com/coding/9726-classify-business-type?python=&code_type=3)
 
 ![image-20241120122017927](/images/2024-11-19-SQL_stratascratch/image-20241120122017927.png)
 
@@ -213,7 +213,7 @@ SELECT distinct business_name,
 FROM sf_restaurant_health_violations;
 ```
 
-## [Liking Score Rating][https://platform.stratascratch.com/coding/9775-liking-score-rating?python=&code_type=3]
+## [Liking Score Rating](https://platform.stratascratch.com/coding/9775-liking-score-rating?python=&code_type=3)
 
 ![image-20241120122829551](/images/2024-11-19-SQL_stratascratch/image-20241120122829551.png)
 
