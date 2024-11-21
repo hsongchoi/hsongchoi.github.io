@@ -11,12 +11,11 @@ use_math: true
 
 This is for the interview of SQL.
 
-- [Reference 1][https://www.stratascratch.com/blog/database-interview-questions/]
-- 
+- [Reference 1](https://www.stratascratch.com/blog/database-interview-questions/)
 
 # WHERE Clause
 
-## [Top Cool Votes][https://platform.stratascratch.com/coding/10060-top-cool-votes?python=&code_type=3]
+## [Top Cool Votes](https://platform.stratascratch.com/coding/10060-top-cool-votes?python=&code_type=3)
 
 ![image-20241119182706852](/images/2024-11-19-SQL_stratascratch/image-20241119182706852.png)
 
