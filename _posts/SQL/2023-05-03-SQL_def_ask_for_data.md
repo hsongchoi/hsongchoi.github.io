@@ -8,6 +8,13 @@ search: true
 use_math: true
 ---
 
+|      |      |      |
+| ---- | ---- | ---- |
+|      |      |      |
+|      |      |      |
+|      |      |      |
+|      |      |      |
+
 # What are a database and SQL?
 
 ## Database
@@ -192,8 +199,6 @@ SELECT REVERSE('SQL Tutorial');
 /* lairotuT LQS
 ```
 
-
-
 ## 2. WHERE
 
 The WHERE keyword lets us add selection criteria to a statement. These clauses need to be in this order to work.
@@ -319,8 +324,6 @@ FROM student_details
 WHERE games IS NULL
 ```
 
-
-
 ## 3. GROUP BY
 
 - Groups rows that have the same values.
@@ -374,6 +377,25 @@ FROM employees
 GROUP BY department
 HAVING COUNT(*) > 50
 ```
+
+- The HAVING clause is applied **after GROUP BY**, so you cannot use SUM(beds) in HAVING without properly grouping the data. Here’s the corrected query:
+
+  ```sql
+  SELECT neighbourhood, AVG(beds) AS average_beds
+  FROM airbnb_search_details
+  GROUP BY neighbourhood
+  HAVING SUM(beds) >= 3
+  ORDER BY average_beds DESC;
+  ```
+
+### Difference between 'where' and 'having' clauses
+
+| Feature                 | `WHERE`                     | `HAVING`                             |
+| ----------------------- | --------------------------- | ------------------------------------ |
+| **When it's applied**   | Before grouping/aggregation | After grouping/aggregation           |
+| **Filters**             | Individual rows             | Groups (or aggregated results)       |
+| **Use with aggregates** | No (works on raw data only) | Yes (works with aggregate functions) |
+| **Example Use**         | `WHERE beds > 3`            | `HAVING AVG(beds) > 3`               |
 
 # Subqueries
 

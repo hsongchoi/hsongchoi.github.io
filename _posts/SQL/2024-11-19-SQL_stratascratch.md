@@ -87,7 +87,7 @@ SELECT
     sum(n_messages) as sum_n_messages
 FROM airbnb_contacts
 GROUP BY id_guest
-ORDER BY sum_n_messages DESC;
+ORDER BY sum_n_messages; -- Desc is unnecessary since the ranks are already generated in descending order.
 ```
 
 ## [Most checkins](https://platform.stratascratch.com/coding/10053-most-checkins?python=&code_type=3)
