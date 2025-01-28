@@ -13,6 +13,29 @@ This is for the interview of SQL.
 
 - [Reference 1](https://www.stratascratch.com/blog/database-interview-questions/)
 
+# SELECT Clause
+
+## Easy question 
+
+### [584. Find Customer Referee](https://leetcode.com/problems/find-customer-referee/)
+
+```sql
+SELECT name
+FROM Customer
+WHERE referee_id != '2' OR referee_id IS NULL
+```
+
+### [1148. Article Views I](https://leetcode.com/problems/article-views-i/)
+
+```sql
+select distinct(author_id) as id
+from Views
+where author_id = viewer_id
+order by author_id
+```
+
+
+
 # WHERE Clause
 
 ## [Top Cool Votes](https://platform.stratascratch.com/coding/10060-top-cool-votes?python=&code_type=3)
@@ -163,6 +186,121 @@ ORDER BY count_of_5_stars DESC;
 ```
 
 # JOINs
+
+## Easy question
+
+### [1378. Replace Employee ID With The Unique Identifier](https://leetcode.com/problems/replace-employee-id-with-the-unique-identifier/)
+
+```sql
+SELECT unique_id, name
+FROM Employees e
+LEFT JOIN EmployeeUNI eu ON e.id = eu.id
+
+```
+
+### [1581. Customer Who Visited but Did Not Make Any Transactions](https://leetcode.com/problems/customer-who-visited-but-did-not-make-any-transactions/)
+
+```sql
+SELECT customer_id, count(v.visit_id) as count_no_trans
+FROM Visits v
+LEFT JOIN Transactions t 
+ON v.visit_id = t.visit_id
+WHERE t.transaction_id is NULL
+GROUP BY 1
+```
+
+### [197. Rising Temperature](https://leetcode.com/problems/rising-temperature/)
+
+```sql
+SELECT y.id
+FROM Weather x
+LEFT JOIN Weather y ON x.recordDate + INTERVAL 1 DAY = y.recordDate 
+# LEFT JOIN Weather y ON x.recordDate + 1 = y.recordDate 
+WHERE x.temperature < y.temperature
+```
+
+### [1661. Average Time of Process per Machine](https://leetcode.com/problems/average-time-of-process-per-machine/)
+
+```sql
+select
+machine_id
+, round(sum(if(activity_type = 'start', -1, 1) *timestamp)/count(distinct process_id),3) as processing_time
+from activity
+group by machine_id
+```
+
+```sql
+SELECT 
+    a.machine_id,
+    ROUND(AVG(b.timestamp - a.timestamp), 3) AS processing_time
+FROM 
+    Activity a
+JOIN 
+    Activity b
+ON 
+    a.machine_id = b.machine_id AND 
+    a.process_id = b.process_id AND 
+    a.activity_type = 'start' AND 
+    b.activity_type = 'end'
+GROUP BY 
+    a.machine_id;
+```
+
+### [577. Employee Bonus](https://leetcode.com/problems/employee-bonus/)
+
+```sql
+SELECT x.name, y.bonus
+FROM Employee x 
+LEFT JOIN bonus y on x.empId = y.empId
+group by 1
+having sum(y.bonus) < 1000 OR sum(y.bonus) IS NULL
+```
+
+### [1280. Students and Examinations](https://leetcode.com/problems/students-and-examinations/)
+
+```sql
+SELECT s.student_id, s.student_name, sub.subject_name, COUNT(e.subject_name) AS attended_exams
+FROM Students s
+CROSS JOIN Subjects sub
+LEFT JOIN Examinations e ON s.student_id = e.student_id AND sub.subject_name = e.subject_name
+GROUP BY s.student_id, s.student_name, sub.subject_name
+ORDER BY s.student_id, sub.subject_name;
+```
+
+- CROSS JOIN:
+
+​		•	The CROSS JOIN ensures that every combination of students and subjects is included in the result.
+
+​		•	This is necessary because each student should be matched with every subject, even if they did not attend any exams for that subject.
+
+### [570. Managers with at Least 5 Direct Reports](https://leetcode.com/problems/managers-with-at-least-5-direct-reports/)
+
+```sql
+SELECT 
+    e.name
+FROM 
+    Employee e
+JOIN 
+    Employee r
+ON 
+    e.id = r.managerId
+GROUP BY 
+    e.id, e.name
+HAVING 
+    COUNT(r.id) >= 5;
+```
+
+### [1934. Confirmation Rate](https://leetcode.com/problems/confirmation-rate/)
+
+```sql
+select s.user_id, round(avg(case when c.action = 'confirmed' then 1 else 0 END), 2) as confirmation_rate
+from Signups s 
+LEFT JOIN Confirmations c on s.user_id = c.user_id
+group by s.user_id
+# round(ifnull(avg(action = 'confirmed'), 0),2) as confirmation_rate
+```
+
+- AVG(CASE WHEN c.action = 'confirmed' THEN 1 ELSE 0 END) = AVG(action = 'confirmed')
 
 ## [Highest Cost orders](https://platform.stratascratch.com/coding/9915-highest-cost-orders?python=&code_type=3)
 
